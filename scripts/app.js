@@ -26,7 +26,7 @@ function createMap() {
       cell.classList.add("path");
     } else if(cellType === 3) {
         cell.classList.add("path");
-        cell.classList.add('PacMan')
+        cell.classList.add('pacman')
         pacmanIndex = index;
 
     }
@@ -36,10 +36,11 @@ function createMap() {
   });
 }
 
-createMap()
+function init(){
+    createMap()
+}
 
-
-
+init()
 
 
 
