@@ -1,0 +1,51 @@
+*{
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+    color: yellow;
+}
+
+body{
+    font-family: "Press Start 2P", system-ui;
+    margin: 0;
+    background-color: black;
+}
+
+#gridArea{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  width: 500px;
+  height: auto;
+  gap: 1px;
+  background: rgb(255, 255, 255);
+}
+
+#grid div {
+  aspect-ratio: 1;
+  background-color: #372f2f;
+}
+
+#grid div.wall {
+  background-color: rgb(51, 75, 255);
+}
+
+#grid div.path {
+  background-color: rgb(155, 155, 155);
+}
+
+#grid div.pacman {
+    background-image: url('../assets/PacMan.png');
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none; 
+}
