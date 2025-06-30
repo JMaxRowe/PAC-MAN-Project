@@ -9,16 +9,18 @@ const layout = [
 ];
 
 
-let pacmanIndex
-let playerSpeed = 200
-let currentSpeed = playerSpeed
+let pacmanIndex;
+let playerSpeed = 200;
+let currentSpeed = playerSpeed;
 let currentDirection;
+let score = 0;
 
 const mapWidth = 10;
-const mapHeight = 12
+const mapHeight = 12;
 const mapArea = mapHeight * mapWidth;
 const grid = document.getElementById("grid");
 const cells = []; 
+const scoreDisplay = document.getElementById("scoreDisplay")
 
 function createMap() {
     layout.forEach((cellType, index) => {
@@ -50,6 +52,7 @@ function addPacMan(){
 }
 
 function init(){
+    scoreDisplay.innerHTML = score
     createMap()
     addPacMan()
 }
@@ -112,7 +115,9 @@ function moveUp(){
             if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;}
+                pacmanIndex = newPosition;
+                eatPellet()
+            }
             else{
                 clearInterval(movementInterval);
                 movementInterval=0;
@@ -128,7 +133,9 @@ function moveDown(){
             if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;}
+                pacmanIndex = newPosition;
+                eatPellet()
+            }
                 else{
                     clearInterval(movementInterval);
                     movementInterval = 0;
@@ -144,7 +151,9 @@ function moveLeft(){
             if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;}
+                pacmanIndex = newPosition;
+                eatPellet()
+            }
                 else{
                     clearInterval(movementInterval)
                     movementInterval = 0
@@ -160,7 +169,9 @@ function moveRight(){
             if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;}
+                pacmanIndex = newPosition;
+                eatPellet()
+            }
                 else{
                     clearInterval(movementInterval)
                     movementInterval = 0
@@ -169,7 +180,13 @@ function moveRight(){
     }
 }
 
-
+function eatPellet(){
+    if(cells[pacmanIndex].classList.contains("pellet")){
+        cells[pacmanIndex].classList.remove("pellet");
+        score += 10;
+        scoreDisplay.innerHTML = score;
+    }
+}
 
 
 
@@ -180,7 +197,7 @@ document.addEventListener("keydown", movePlayer)
 
 init()
 
-
+console.log(scoreDisplay)
 
 
 
