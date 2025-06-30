@@ -1,6 +1,6 @@
 const layout = [
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 4, 0, 0, 0, 0, 0, 0, 1,
     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
     1, 0, 1, 0, 0, 3, 0, 1, 0, 1,
     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
@@ -14,6 +14,7 @@ let playerSpeed = 200;
 let currentSpeed = playerSpeed;
 let currentDirection;
 let score = 0;
+let pelletCount = 0;
 
 const mapWidth = 10;
 const mapHeight = 12;
@@ -21,6 +22,7 @@ const mapArea = mapHeight * mapWidth;
 const grid = document.getElementById("grid");
 const cells = []; 
 const scoreDisplay = document.getElementById("scoreDisplay")
+const winScreen = document.querySelector(".winScreen")
 
 function createMap() {
     layout.forEach((cellType, index) => {
@@ -35,6 +37,9 @@ function createMap() {
         cell.classList.add("pellet");
         } else if(cellType === 3) {
             cell.classList.add("path");
+        }
+        else if(cellType === 4){
+            cell.classList.add("path","ghost")
         }
 
         grid.appendChild(cell);
@@ -55,6 +60,16 @@ function init(){
     scoreDisplay.innerHTML = score
     createMap()
     addPacMan()
+    calculatePellets()
+}
+
+function calculatePellets(){
+    layout.forEach((cell) => {
+        pelletCount;
+        if (cell === 0){
+            pelletCount += 1}
+        
+    })
 }
 
 function movePlayer(e){
@@ -112,7 +127,10 @@ function moveUp(){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
             let newPosition = pacmanIndex - mapWidth
-            if (!cells[newPosition].classList.contains("wall")){
+            if (pelletCount === 0){
+                wonGame();
+            }
+            else if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
@@ -130,7 +148,10 @@ function moveDown(){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
             let newPosition = pacmanIndex + mapWidth
-            if (!cells[newPosition].classList.contains("wall")){
+            if (pelletCount === 0){
+                wonGame();
+            }
+            else if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
@@ -148,7 +169,10 @@ function moveLeft(){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
             let newPosition = pacmanIndex - 1
-            if (!cells[newPosition].classList.contains("wall")){
+            if (pelletCount === 0){
+                wonGame();
+            }
+            else if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
@@ -166,7 +190,12 @@ function moveRight(){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
             let newPosition = pacmanIndex + 1
-            if (!cells[newPosition].classList.contains("wall")){
+            if (pelletCount === 0){
+                if (pelletCount === 0){
+                wonGame();
+            }
+            }
+            else if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
@@ -185,7 +214,15 @@ function eatPellet(){
         cells[pacmanIndex].classList.remove("pellet");
         score += 10;
         scoreDisplay.innerHTML = score;
+        pelletCount -= 1;
     }
+}
+
+function wonGame(){
+    clearInterval(movementInterval);
+    movementInterval=0;
+    winScreen.style.display = "flex";
+    console.log("you won the game")
 }
 
 
@@ -197,7 +234,8 @@ document.addEventListener("keydown", movePlayer)
 
 init()
 
-console.log(scoreDisplay)
+console.log(pelletCount)
+
 
 
 

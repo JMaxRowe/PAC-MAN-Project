@@ -11,13 +11,18 @@
     <script defer src="scripts/app.js" charset="utf-8"></script>
 </head>
 <body>
-    <h1>Pac-Man</h1>
+    <h1>PAC-MAN</h1>
+    <section class="winScreen">
+        <div class="winMessage">YOU WON!!</div>
+        <div class="finalScore">FINAL SCORE: <span id="finalScoreValue"></span></div>
+        <div class="restart">RESTART</div>
+    </section>
     <main id="gridArea">
         <div class="gameInfo">
             <div class="lives">
-                <div class="heart">♥️</div>
-                <div class="heart">♥️</div>
-                <div class="heart">♥️</div>
+                <div class="heart"></div>
+                <div class="heart"></div>
+                <div class="heart"></div>
             </div>
             <div class="score">score: <span id="scoreDisplay"></span></div>
         </div>
