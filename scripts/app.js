@@ -1,12 +1,46 @@
+// const layout = [
+//     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+//     1, 2, 4, 0, 0, 0, 0, 0, 2, 1,
+//     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+//     1, 0, 1, 0, 0, 3, 0, 1, 0, 1,
+//     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+//     1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+//     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+// ];
+
 const layout = [
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 4, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
-    1, 0, 1, 0, 0, 3, 0, 1, 0, 1,
-    1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+  1,2,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,2,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
+
+
+
 
 
 let pacmanIndex;
@@ -24,20 +58,25 @@ let ghostSpeed = 200;
 let previousGhostIndex;
 let ghostMovementInterval;
 
-const mapWidth = 10;
-const mapHeight = 7;
+const startingSpeed = 200;
+const powerSpeed = 100;
+const mapWidth = 28;
+const mapHeight = 31;
 const mapArea = mapHeight * mapWidth;
 const grid = document.getElementById("grid");
 const cells = []; 
 const scoreDisplay = document.getElementById("scoreDisplay");
 const winScreen = document.querySelector(".winScreen");
 const finalScoreDisplay = document.getElementById("finalScoreValue");
-const loseScreen = document.querySelector(".gameOverScreen")
-const loserScoreValue = document.getElementById("loserScoreValue")
+const loseScreen = document.querySelector(".gameOverScreen");
+const loserScoreValue = document.getElementById("loserScoreValue");
+const tryAgainButton = document.querySelector(".retryButton");
+const playAgainButton = document.querySelector(".restart");
+const livesDisplay = document.querySelector(".lives")
 
 const ghosts = [
 {
-    index: 12,
+    index: null,
     speed: 200,
     className: "redGhost",
     interval: 0,
@@ -52,14 +91,20 @@ function createMap() {
     layout.forEach((cellType, index) => {
         const cell = document.createElement("div");
         cell.dataset.index = index;
-        cell.innerText = index;
+        // cell.innerText = index;
+        cell.classList.add("cell")
 
         if (cellType === 1) {
         cell.classList.add("wall");
         } else if (cellType === 0) {
         cell.classList.add("path");
         cell.classList.add("pellet");
-        } else if(cellType === 3) {
+        }
+        else if(cellType === 2){
+            cell.classList.add("path");
+            cell.classList.add("powerPellet")
+        }
+        else if(cellType === 3) {
             cell.classList.add("path");
         }
         else if(cellType === 4){
@@ -91,14 +136,18 @@ function addRedGhost(ghostObj){
     })
 }
 function init(){
+    lives = 3
+    setHearts()
     scoreDisplay.innerHTML = score
     createMap()
     addPacMan()
     addRedGhost()
     calculatePellets()
+    moveGhost(redGhost)
 }
 
 function calculatePellets(){
+    pelletCount = 0
     layout.forEach((cell) => {
         pelletCount;
         if (cell === 0){
@@ -129,7 +178,7 @@ function startMovement(dir){
         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            moveUp()
+            playerMoveLoop(dir)
         }
         else(console.log("wall in the way"))
     }
@@ -137,7 +186,7 @@ function startMovement(dir){
         if (!cells[pacmanIndex-1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            moveLeft()
+            playerMoveLoop(dir)
         }
         else{console.log("wall in the way")}
     }
@@ -145,23 +194,24 @@ function startMovement(dir){
         if (!cells[pacmanIndex + mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            moveDown()
+            playerMoveLoop(dir)
         }
         else{console.log("wall in the way")}
     }
-    else if (!cells[pacmanIndex+1].classList.contains("wall")){
+    else if(dir === "right"){
+        if (!cells[pacmanIndex+1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            moveRight()
+            playerMoveLoop(dir)
         }
         else{console.log("wall in the way")}
+    }
 }
 
-
-function moveUp(){
+function playerMoveLoop(dir){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
-            let newPosition = pacmanIndex - mapWidth
+            let newPosition = newPlayerPosition(dir)
             if (pelletCount === 0){
                 wonGame();
             }
@@ -180,73 +230,23 @@ function moveUp(){
     }
 }
 
-function moveDown(){
-    if (!movementInterval){
-        movementInterval = setInterval(() =>{
-            let newPosition = pacmanIndex + mapWidth
-            if (pelletCount === 0){
-                wonGame();
-            }
-            else if (!cells[newPosition].classList.contains("wall")){
-                cells[pacmanIndex].classList.remove("pacman")
-                cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;
-                eatPellet()
-                checkForGhost()
-            }
-                else{
-                    clearInterval(movementInterval);
-                    movementInterval = 0;
-                }
-        }, playerSpeed)
+function newPlayerPosition(dir){
+    if (dir === "up"){
+        return pacmanIndex-mapWidth;
+    }
+    else if (dir === "left"){
+        return pacmanIndex-1;
+    }
+    else if (dir === "down"){
+        return pacmanIndex + mapWidth;
+    }
+    else if(dir === "right"){
+        return pacmanIndex + 1
     }
 }
 
-function moveLeft(){
-    if (!movementInterval){
-        movementInterval = setInterval(() =>{
-            let newPosition = pacmanIndex - 1
-            if (pelletCount === 0){
-                wonGame();
-            }
-            else if (!cells[newPosition].classList.contains("wall")){
-                cells[pacmanIndex].classList.remove("pacman")
-                cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;
-                eatPellet()
-                checkForGhost()
-            }
-                else{
-                    clearInterval(movementInterval)
-                    movementInterval = 0
-                }
-        }, playerSpeed)
-    }
-}
 
-function moveRight(){
-    if (!movementInterval){
-        movementInterval = setInterval(() =>{
-            let newPosition = pacmanIndex + 1
-            if (pelletCount === 0){
-                if (pelletCount === 0){
-                wonGame();
-            }
-            }
-            else if (!cells[newPosition].classList.contains("wall")){
-                cells[pacmanIndex].classList.remove("pacman")
-                cells[newPosition].classList.add("pacman")
-                pacmanIndex = newPosition;
-                eatPellet()
-                checkForGhost()
-            }
-                else{
-                    clearInterval(movementInterval)
-                    movementInterval = 0
-                }
-        }, playerSpeed)
-    }
-}
+
 
 function eatPellet(){
     if(cells[pacmanIndex].classList.contains("pellet")){
@@ -255,8 +255,25 @@ function eatPellet(){
         scoreDisplay.innerHTML = score;
         pelletCount -= 1;
     }
+    else if (cells[pacmanIndex].classList.contains("powerPellet")){
+        powerPellet()
+    }
 }
 
+function powerPellet(){
+    score += 50
+    playerSpeed = powerSpeed
+    cells[pacmanIndex].classList.remove("powerPellet")
+    ghosts.forEach((ghost)=>{
+        cells[ghost.index].classList.add("scaredGhost")
+    })
+    setTimeout(()=>{
+        playerSpeed = startingSpeed
+        ghosts.forEach((ghost)=>{
+            cells[ghost.index].classList.remove("scaredGhost")
+        })
+    }, 5000)
+}
 
 
 function moveGhost(ghostObj){
@@ -299,12 +316,22 @@ function startGhostMovement(ghostObj, dir){
                 wonGame();
             }
             else if (!cells[newPosition].classList.contains("wall")){
-                cells[ghostObj.index].classList.remove("redGhost")
-                cells[newPosition].classList.add("redGhost")
-                ghostObj.previousIndex = ghostObj.index;
-                ghostObj.index = newPosition;
-                choosePath(ghostObj);
-                checkForPacman(ghostObj);
+                if (cells[ghostObj.index].classList.contains("scaredGhost")){
+                    cells[ghostObj.index].classList.remove(ghostObj.className, "scaredGhost")
+                    cells[newPosition].classList.add(ghostObj.className, "scaredGhost")
+                    ghostObj.previousIndex = ghostObj.index;
+                    ghostObj.index = newPosition;
+                    choosePath(ghostObj);
+                    checkForPacman(ghostObj);
+                }
+                else {
+                    cells[ghostObj.index].classList.remove(ghostObj.className)
+                    cells[newPosition].classList.add(ghostObj.className)
+                    ghostObj.previousIndex = ghostObj.index;
+                    ghostObj.index = newPosition;
+                    choosePath(ghostObj);
+                    checkForPacman(ghostObj);
+            }
             }
             else{
                 clearInterval(ghostObj.interval);
@@ -343,18 +370,38 @@ if (directions.length > 1){
 
 
 function checkForPacman(ghostObj){
-    if(cells[ghostObj.index].classList.contains("pacman")){
+    if(cells[ghostObj.index].classList.contains("scaredGhost")&&cells[ghostObj.index].classList.contains("pacman")){
+        eatGhost(ghostObj)
+    }
+    else if(cells[ghostObj.index].classList.contains("pacman")){
         loseLife()
     }
 }
 
 function checkForGhost(){
-    if(cells[pacmanIndex].classList.contains("redGhost")){
+    const collidedGhost = ghosts.find(ghost=> ghost.index === pacmanIndex)
+    if(cells[pacmanIndex].classList.contains("scaredGhost")){
+        eatGhost(collidedGhost)
+    }
+    else if(cells[pacmanIndex].classList.contains("redGhost")){
         loseLife()
     }
 }
 
+function eatGhost(ghostObj){
+    score =+ 100
+    cells[ghostObj.index].classList.remove("scaredGhost", ghostObj.className)
+    clearInterval(ghostObj.interval)
+    ghostObj.interval = 0
+    ghostObj.index = ghostObj.startingIndex;
+    setTimeout(()=>{
+        cells[ghostObj.startingIndex].classList.add(ghostObj.className);
+        moveGhost(ghostObj)
+    },1000)
+}
+
 function loseLife(){
+    document.removeEventListener("keydown", movePlayer)
     clearInterval(movementInterval)
     movementInterval = 0;
     clearInterval(redGhost.interval)
@@ -373,7 +420,6 @@ function loseHeart(){
 
 function resetPositions(){
     setTimeout(() => {
-    document.removeEventListener("keydown", movePlayer)
     cells[pacmanIndex].classList.remove("pacman")
     pacmanIndex = pacmanStartingIndex;
     cells[pacmanStartingIndex].classList.add("pacman")
@@ -404,16 +450,66 @@ function loseGame(){
     loserScoreValue.innerHTML = score;
 }
 
+function restart(){
+    hideDisplays()
+    lives = 3
+    score = 0
+    
+    setHearts()
+    scoreDisplay.innerHTML = score
+    removeAllSprites()
+    addPacMan()
+    document.addEventListener("keydown", movePlayer)
+    addRedGhost()
+    addPellets()
+    calculatePellets()
+    moveGhost(redGhost)
+}
+
+function hideDisplays(){
+    loseScreen.style.display = "none";
+    winScreen.style.display = "none";
+}
+
+function removeAllSprites() {
+    cells.forEach(cell => {
+        cell.classList.remove("pacman", "redGhost", "scaredGhost");
+    });
+}
+
+
+function setHearts() {
+    const allHearts = document.querySelectorAll(".lives div");
+    allHearts.forEach(heart => {
+        heart.classList.remove("greyHeart");
+        heart.classList.add("heart");
+    });
+}
+
+function addPellets(){
+    layout.forEach((cellType, index) => {
+        const cell = cells[index]
+        if (cellType === 0) {
+        cell.classList.add("pellet");
+        }
+        else if (cellType === 2){
+            cell.classList.add("powerPellet")
+        }
+    });
+}
+
 
 document.addEventListener("keydown", movePlayer)
 
-document.addEventListener
+tryAgainButton.addEventListener("click", restart)
+playAgainButton.addEventListener("click", restart)
+
 
 
 init()
 
 
-moveGhost(redGhost)
+
 
 
 
@@ -485,4 +581,94 @@ moveGhost(redGhost)
 //         options += 1;
 //     }
 //     return options
+// }
+
+// function moveUp(){
+//     if (!movementInterval){
+//         movementInterval = setInterval(() =>{
+//             let newPosition = pacmanIndex - mapWidth
+//             if (pelletCount === 0){
+//                 wonGame();
+//             }
+//             else if (!cells[newPosition].classList.contains("wall")){
+//                 cells[pacmanIndex].classList.remove("pacman")
+//                 cells[newPosition].classList.add("pacman")
+//                 pacmanIndex = newPosition;
+//                 eatPellet()
+//                 checkForGhost()
+//             }
+//             else{
+//                 clearInterval(movementInterval);
+//                 movementInterval=0;
+//             }
+//         }, playerSpeed)
+//     }
+// }
+
+// function moveDown(){
+//     if (!movementInterval){
+//         movementInterval = setInterval(() =>{
+//             let newPosition = pacmanIndex + mapWidth
+//             if (pelletCount === 0){
+//                 wonGame();
+//             }
+//             else if (!cells[newPosition].classList.contains("wall")){
+//                 cells[pacmanIndex].classList.remove("pacman")
+//                 cells[newPosition].classList.add("pacman")
+//                 pacmanIndex = newPosition;
+//                 eatPellet()
+//                 checkForGhost()
+//             }
+//                 else{
+//                     clearInterval(movementInterval);
+//                     movementInterval = 0;
+//                 }
+//         }, playerSpeed)
+//     }
+// }
+
+// function moveLeft(){
+//     if (!movementInterval){
+//         movementInterval = setInterval(() =>{
+//             let newPosition = pacmanIndex - 1
+//             if (pelletCount === 0){
+//                 wonGame();
+//             }
+//             else if (!cells[newPosition].classList.contains("wall")){
+//                 cells[pacmanIndex].classList.remove("pacman")
+//                 cells[newPosition].classList.add("pacman")
+//                 pacmanIndex = newPosition;
+//                 eatPellet()
+//                 checkForGhost()
+//             }
+//                 else{
+//                     clearInterval(movementInterval)
+//                     movementInterval = 0
+//                 }
+//         }, playerSpeed)
+//     }
+// }
+
+// function moveRight(){
+//     if (!movementInterval){
+//         movementInterval = setInterval(() =>{
+//             let newPosition = pacmanIndex + 1
+//             if (pelletCount === 0){
+//                 if (pelletCount === 0){
+//                 wonGame();
+//             }
+//             }
+//             else if (!cells[newPosition].classList.contains("wall")){
+//                 cells[pacmanIndex].classList.remove("pacman")
+//                 cells[newPosition].classList.add("pacman")
+//                 pacmanIndex = newPosition;
+//                 eatPellet()
+//                 checkForGhost()
+//             }
+//                 else{
+//                     clearInterval(movementInterval)
+//                     movementInterval = 0
+//                 }
+//         }, playerSpeed)
+//     }
 // }

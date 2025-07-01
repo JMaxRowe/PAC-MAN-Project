@@ -61,10 +61,10 @@ main{
 
 #grid {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    width: 500px;
+    grid-template-columns: repeat(28, 1fr);
+    width: 800px;
     height: auto;
-    gap: 1px;
+    gap: 0px;
     background: rgb(255, 255, 255);
 }
 
@@ -90,6 +90,14 @@ main{
     background-repeat: no-repeat;
 }
 
+#grid div.powerPellet{
+    background-color: black;
+    background-image: url("../assets/power_pellet2.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 #grid div.pacman {
     background-image: url('../assets/PacMan.png'); 
     background-size: contain;
@@ -99,6 +107,13 @@ main{
 
 #grid div.redGhost{
     background-image: url('../assets/blinky.png'); 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#grid div.scaredGhost{
+    background-image: url('../assets/Pacman_Vulnerable_Ghost.webp'); 
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -170,3 +185,4 @@ main{
 .retryButton:hover{
     color: darkorange;
 }
+
