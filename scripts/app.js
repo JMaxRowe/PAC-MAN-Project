@@ -57,6 +57,7 @@ let lives = 3
 let ghostSpeed = 200;
 let previousGhostIndex;
 let ghostMovementInterval;
+let powerPelletTimeout;
 
 const startingSpeed = 200;
 const powerSpeed = 100;
@@ -252,7 +253,8 @@ function powerPellet(){
     ghosts.forEach((ghost)=>{
         cells[ghost.index].classList.add("scaredGhost")
     })
-    setTimeout(()=>{
+    clearTimeout(powerPelletTimeout)
+    powerPelletTimeout = setTimeout(()=>{
         playerSpeed = startingSpeed
         ghosts.forEach((ghost)=>{
             cells[ghost.index].classList.remove("scaredGhost")

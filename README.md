@@ -33,56 +33,32 @@ Determines movement direction based on input
 function movePlayer(e){
     console.log(e);
     if(e.code === "KeyW"){
-        startMovement("up");
-        }
-    else if(e.code === "KeyA"){
-        startMovement("left");
-        }
-    else if(e.code === "KeyS"){
-        startMovement("down");
-        console.log("down")}
-    else if(e.code === "KeyD"){
-        startMovement("right");
-        console.log("right")}
-    else{console.log("not valid input")}
-} 
-```
-
-```
-function startMovement(dir){
-    if (dir === "up"){
         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else(console.log("wall in the way"))
-    }
-    else if (dir === "left"){
+            playerMoveLoop("up")
+        }}
+    else if(e.code === "KeyA"){
         if (!cells[pacmanIndex-1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
+            playerMoveLoop("left")
         }
-        else{console.log("wall in the way")}
     }
-    else if(dir === "down"){
+    else if(e.code === "KeyS"){
         if (!cells[pacmanIndex + mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else{console.log("wall in the way")}
-    }
-    else if(dir === "right"){
+            playerMoveLoop("down")
+        }}
+    else if(e.code === "KeyD"){
         if (!cells[pacmanIndex+1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else{console.log("wall in the way")}
-    }
-}
+            playerMoveLoop("right")
+        }}
+    else{console.log("not valid input")}
+} 
 ```
 
 ```
