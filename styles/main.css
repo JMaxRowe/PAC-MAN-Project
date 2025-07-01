@@ -50,7 +50,7 @@ main{
     width: 30px;
     aspect-ratio: 1/1;
 }
-.heart.grey{
+.greyHeart{
     background-image: url(../assets/grey_heart.png);
     background-size: contain;
     background-position: center;
@@ -137,3 +137,36 @@ main{
     color: darkorange;
 }
 
+.gameOverScreen{
+    position: fixed;
+    width: 500px;
+    height: 200px;
+    background-color: rgb(0, 4, 244);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.loseMessage{
+    font-size: 1.5em;
+    color: red
+}
+.loserScore{
+    font-size: 0.75em;
+}
+.retryButton{
+    font-size: 0.75em;
+    color: yellow;
+    cursor: pointer;
+}
+
+.retryButton:hover{
+    color: darkorange;
+}

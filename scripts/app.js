@@ -10,6 +10,7 @@ const layout = [
 
 
 let pacmanIndex;
+let pacmanStartingIndex
 let playerSpeed = 200;
 let currentSpeed = playerSpeed;
 let currentDirection;
@@ -17,6 +18,7 @@ let movementInterval;
 
 let score = 0;
 let pelletCount = 0;
+let lives = 3
 
 let ghostSpeed = 200;
 let previousGhostIndex;
@@ -27,9 +29,11 @@ const mapHeight = 7;
 const mapArea = mapHeight * mapWidth;
 const grid = document.getElementById("grid");
 const cells = []; 
-const scoreDisplay = document.getElementById("scoreDisplay")
-const winScreen = document.querySelector(".winScreen")
-const finalScoreDisplay = document.getElementById("finalScoreValue")
+const scoreDisplay = document.getElementById("scoreDisplay");
+const winScreen = document.querySelector(".winScreen");
+const finalScoreDisplay = document.getElementById("finalScoreValue");
+const loseScreen = document.querySelector(".gameOverScreen")
+const loserScoreValue = document.getElementById("loserScoreValue")
 
 const ghosts = [
 {
@@ -38,6 +42,7 @@ const ghosts = [
     className: "redGhost",
     interval: 0,
     previousIndex: null,
+    startingIndex: null,
 },
 ]
 const redGhost = ghosts[0]
@@ -70,17 +75,19 @@ function addPacMan(){
     layout.forEach((cellType, index) =>{
         if (cellType === 3) {
             cells[index].classList.add("pacman");
+            pacmanStartingIndex = index;
             pacmanIndex = index;
-}
+        }
     })
 }
 
-function addRedGhost(){
+function addRedGhost(ghostObj){
     layout.forEach((cellType, index) =>{
         if (cellType === 4) {
             cells[index].classList.add("redGhost");
+            redGhost.startingIndex = index
             redGhost.index = index;
-}
+        }
     })
 }
 function init(){
@@ -163,6 +170,7 @@ function moveUp(){
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
                 eatPellet()
+                checkForGhost()
             }
             else{
                 clearInterval(movementInterval);
@@ -184,6 +192,7 @@ function moveDown(){
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
                 eatPellet()
+                checkForGhost()
             }
                 else{
                     clearInterval(movementInterval);
@@ -205,6 +214,7 @@ function moveLeft(){
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
                 eatPellet()
+                checkForGhost()
             }
                 else{
                     clearInterval(movementInterval)
@@ -228,6 +238,7 @@ function moveRight(){
                 cells[newPosition].classList.add("pacman")
                 pacmanIndex = newPosition;
                 eatPellet()
+                checkForGhost()
             }
                 else{
                     clearInterval(movementInterval)
@@ -246,13 +257,7 @@ function eatPellet(){
     }
 }
 
-function wonGame(){
-    clearInterval(movementInterval);
-    movementInterval=0;
-    winScreen.style.display = "flex";
-    finalScoreDisplay.innerHTML = score;
-    console.log("you won the game")
-}
+
 
 function moveGhost(ghostObj){
 //checkDirections
@@ -299,7 +304,7 @@ function startGhostMovement(ghostObj, dir){
                 ghostObj.previousIndex = ghostObj.index;
                 ghostObj.index = newPosition;
                 choosePath(ghostObj);
-                checkForPacman(ghostObj)
+                checkForPacman(ghostObj);
             }
             else{
                 clearInterval(ghostObj.interval);
@@ -335,32 +340,74 @@ if (directions.length > 1){
 }
 }
 
-function findNumOfPaths(ghostObj){
-    let options = 0;
-    if (!cells[ghostObj.index-1].classList.contains("wall") && ghostObj.index-1 !== previousGhostIndex){
-        options += 1;
+
+
+function checkForPacman(ghostObj){
+    if(cells[ghostObj.index].classList.contains("pacman")){
+        loseLife()
     }
-    if (!cells[ghostObj.index-mapWidth].classList.contains("wall") && ghostObj.index-mapWidth !== previousGhostIndex){
-        options += 1;
-    }
-    if (!cells[ghostObj.index+1].classList.contains("wall") && ghostObj.index+1 !== previousGhostIndex){
-        options += 1;
-    }
-    if (!cells[ghostObj.index+mapWidth].classList.contains("wall") && ghostObj.index+mapWidth !== previousGhostIndex){
-        options += 1;
-    }
-    return options
 }
 
-function checkForPacman()
+function checkForGhost(){
+    if(cells[pacmanIndex].classList.contains("redGhost")){
+        loseLife()
+    }
+}
 
+function loseLife(){
+    clearInterval(movementInterval)
+    movementInterval = 0;
+    clearInterval(redGhost.interval)
+    redGhost.interval = 0;
+    lives --;
+    loseHeart()
+    if(lives===0){loseGame()}
+    else{resetPositions()}
+}
 
+function loseHeart(){
+    let nextHeart = document.querySelector(".heart")
+    nextHeart.classList.remove("heart")
+    nextHeart.classList.add('greyHeart')
+}
 
+function resetPositions(){
+    setTimeout(() => {
+    document.removeEventListener("keydown", movePlayer)
+    cells[pacmanIndex].classList.remove("pacman")
+    pacmanIndex = pacmanStartingIndex;
+    cells[pacmanStartingIndex].classList.add("pacman")
+    
+    ghosts.forEach((ghost)=>{
+        cells[ghost.index].classList.remove(ghost.className);
+        ghost.index = ghost.startingIndex
+        cells[ghost.index].classList.add(ghost.className);
+        activateSprites()
+    })
+}, 2000)
+}
+function activateSprites(){
+    document.addEventListener("keydown", movePlayer)
+    moveGhost(redGhost)
+}
 
+function wonGame(){
+    clearInterval(movementInterval);
+    movementInterval=0;
+    winScreen.style.display = "flex";
+    finalScoreDisplay.innerHTML = score;
+    console.log("you won the game")
+}
 
+function loseGame(){
+    loseScreen.style.display = "flex";
+    loserScoreValue.innerHTML = score;
+}
 
 
 document.addEventListener("keydown", movePlayer)
+
+document.addEventListener
 
 
 init()
@@ -422,3 +469,20 @@ moveGhost(redGhost)
 //             }
 //     }, playerSpeed)}
 //}
+
+// function findNumOfPaths(ghostObj){
+//     let options = 0;
+//     if (!cells[ghostObj.index-1].classList.contains("wall") && ghostObj.index-1 !== previousGhostIndex){
+//         options += 1;
+//     }
+//     if (!cells[ghostObj.index-mapWidth].classList.contains("wall") && ghostObj.index-mapWidth !== previousGhostIndex){
+//         options += 1;
+//     }
+//     if (!cells[ghostObj.index+1].classList.contains("wall") && ghostObj.index+1 !== previousGhostIndex){
+//         options += 1;
+//     }
+//     if (!cells[ghostObj.index+mapWidth].classList.contains("wall") && ghostObj.index+mapWidth !== previousGhostIndex){
+//         options += 1;
+//     }
+//     return options
+// }
