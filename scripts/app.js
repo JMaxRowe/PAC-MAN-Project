@@ -13,16 +13,35 @@ let pacmanIndex;
 let playerSpeed = 200;
 let currentSpeed = playerSpeed;
 let currentDirection;
+let movementInterval;
+
 let score = 0;
 let pelletCount = 0;
 
+let ghostSpeed = 200;
+let previousGhostIndex;
+let ghostMovementInterval;
+
 const mapWidth = 10;
-const mapHeight = 12;
+const mapHeight = 7;
 const mapArea = mapHeight * mapWidth;
 const grid = document.getElementById("grid");
 const cells = []; 
 const scoreDisplay = document.getElementById("scoreDisplay")
 const winScreen = document.querySelector(".winScreen")
+const finalScoreDisplay = document.getElementById("finalScoreValue")
+
+const ghosts = [
+{
+    index: 12,
+    speed: 200,
+    className: "redGhost",
+    interval: 0,
+    previousIndex: null,
+},
+]
+const redGhost = ghosts[0]
+
 
 function createMap() {
     layout.forEach((cellType, index) => {
@@ -39,7 +58,7 @@ function createMap() {
             cell.classList.add("path");
         }
         else if(cellType === 4){
-            cell.classList.add("path","ghost")
+            cell.classList.add("path")
         }
 
         grid.appendChild(cell);
@@ -56,10 +75,19 @@ function addPacMan(){
     })
 }
 
+function addRedGhost(){
+    layout.forEach((cellType, index) =>{
+        if (cellType === 4) {
+            cells[index].classList.add("redGhost");
+            redGhost.index = index;
+}
+    })
+}
 function init(){
     scoreDisplay.innerHTML = score
     createMap()
     addPacMan()
+    addRedGhost()
     calculatePellets()
 }
 
@@ -122,7 +150,7 @@ function startMovement(dir){
         else{console.log("wall in the way")}
 }
 
-let movementInterval;
+
 function moveUp(){
     if (!movementInterval){
         movementInterval = setInterval(() =>{
@@ -222,8 +250,111 @@ function wonGame(){
     clearInterval(movementInterval);
     movementInterval=0;
     winScreen.style.display = "flex";
+    finalScoreDisplay.innerHTML = score;
     console.log("you won the game")
 }
+
+function moveGhost(ghostObj){
+//checkDirections
+    let validDirs = checkGhostDirections(ghostObj);
+//pickDirection
+    let newDir = pickDirection(validDirs);
+//startGhostMovement
+    startGhostMovement(ghostObj, newDir);
+}
+
+function checkGhostDirections(ghostObj){
+    let directions = [];
+    if (!cells[ghostObj.index-1].classList.contains("wall") && ghostObj.index-1 !== ghostObj.previousIndex){
+        directions.push("left")
+    }
+    if (!cells[ghostObj.index-mapWidth].classList.contains("wall") && ghostObj.index-mapWidth !== ghostObj.previousIndex){
+        directions.push("up")
+    }
+    if (!cells[ghostObj.index+1].classList.contains("wall") && ghostObj.index+1 !== ghostObj.previousIndex){
+        directions.push("right")
+    }
+    if (!cells[ghostObj.index+mapWidth].classList.contains("wall") && ghostObj.index+mapWidth !== ghostObj.previousIndex){
+        directions.push("down")
+    }
+    return directions
+}
+
+function pickDirection(dirs){
+    let randnum = Math.floor(Math.random() * dirs.length);
+    return dirs[randnum]
+}
+
+
+function startGhostMovement(ghostObj, dir){
+    if (!ghostObj.interval){
+        ghostObj.interval = setInterval(() =>{
+            let newPosition = movePosition(ghostObj, dir)
+            if (pelletCount === 0){
+                wonGame();
+            }
+            else if (!cells[newPosition].classList.contains("wall")){
+                cells[ghostObj.index].classList.remove("redGhost")
+                cells[newPosition].classList.add("redGhost")
+                ghostObj.previousIndex = ghostObj.index;
+                ghostObj.index = newPosition;
+                choosePath(ghostObj);
+                checkForPacman(ghostObj)
+            }
+            else{
+                clearInterval(ghostObj.interval);
+                ghostObj.interval=0;
+                moveGhost(ghostObj)
+            }
+        }, ghostObj.speed)
+    }
+}
+
+function movePosition(ghostObj, dir){
+    if (dir === "up"){
+        return ghostObj.index-mapWidth;
+    }
+    else if (dir === "left"){
+        return ghostObj.index-1;
+    }
+    else if (dir === "down"){
+        return ghostObj.index + mapWidth;
+    }
+    else if(dir === "right"){
+        return ghostObj.index + 1
+    }
+}
+
+function choosePath(ghostObj){
+let directions = checkGhostDirections(ghostObj);
+if (directions.length > 1){
+    clearInterval(ghostObj.interval);
+    ghostObj.interval = 0;
+    let newDir = pickDirection(directions);
+    startGhostMovement(ghostObj,newDir);
+}
+}
+
+function findNumOfPaths(ghostObj){
+    let options = 0;
+    if (!cells[ghostObj.index-1].classList.contains("wall") && ghostObj.index-1 !== previousGhostIndex){
+        options += 1;
+    }
+    if (!cells[ghostObj.index-mapWidth].classList.contains("wall") && ghostObj.index-mapWidth !== previousGhostIndex){
+        options += 1;
+    }
+    if (!cells[ghostObj.index+1].classList.contains("wall") && ghostObj.index+1 !== previousGhostIndex){
+        options += 1;
+    }
+    if (!cells[ghostObj.index+mapWidth].classList.contains("wall") && ghostObj.index+mapWidth !== previousGhostIndex){
+        options += 1;
+    }
+    return options
+}
+
+function checkForPacman()
+
+
 
 
 
@@ -234,14 +365,8 @@ document.addEventListener("keydown", movePlayer)
 
 init()
 
-console.log(pelletCount)
 
-
-
-
-
-
-
+moveGhost(redGhost)
 
 
 
@@ -296,4 +421,4 @@ console.log(pelletCount)
 //                 console.log(pacmanIndex - mapWidth)
 //             }
 //     }, playerSpeed)}
-// }
+//}

@@ -14,6 +14,10 @@ body{
     background-color: black;
     color: white;
 }
+main{
+    display: flex;
+    gap: 20px;
+}
 
 #gridArea{
     min-height: 50vh;
@@ -93,8 +97,11 @@ body{
     background-repeat: no-repeat;
 }
 
-#grid div.ghost{
-    
+#grid div.redGhost{
+    background-image: url('../assets/blinky.png'); 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .winScreen{
