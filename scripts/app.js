@@ -22,9 +22,9 @@ const layout = [
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,2,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
   1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,1,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,1,1,1,1,1,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
@@ -96,7 +96,8 @@ function createMap() {
 
         if (cellType === 1) {
         cell.classList.add("wall");
-        } else if (cellType === 0) {
+        } 
+        else if (cellType === 0) {
         cell.classList.add("path");
         cell.classList.add("pellet");
         }
@@ -108,6 +109,9 @@ function createMap() {
             cell.classList.add("path");
         }
         else if(cellType === 4){
+            cell.classList.add("path")
+        }
+        else if (cellType === 5){
             cell.classList.add("path")
         }
 
@@ -156,57 +160,38 @@ function calculatePellets(){
     })
 }
 
+
 function movePlayer(e){
     console.log(e);
     if(e.code === "KeyW"){
-        startMovement("up");
-        console.log("up")}
-    else if(e.code === "KeyA"){
-        startMovement("left");
-        console.log("left")}
-    else if(e.code === "KeyS"){
-        startMovement("down");
-        console.log("down")}
-    else if(e.code === "KeyD"){
-        startMovement("right");
-        console.log("right")}
-    else{console.log("not valid input")}
-} 
-
-function startMovement(dir){
-    if (dir === "up"){
         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else(console.log("wall in the way"))
-    }
-    else if (dir === "left"){
+            playerMoveLoop("up")
+        }}
+    else if(e.code === "KeyA"){
         if (!cells[pacmanIndex-1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
+            playerMoveLoop("left")
         }
-        else{console.log("wall in the way")}
     }
-    else if(dir === "down"){
+    else if(e.code === "KeyS"){
         if (!cells[pacmanIndex + mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else{console.log("wall in the way")}
-    }
-    else if(dir === "right"){
+            playerMoveLoop("down")
+        }}
+    else if(e.code === "KeyD"){
         if (!cells[pacmanIndex+1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
-            playerMoveLoop(dir)
-        }
-        else{console.log("wall in the way")}
-    }
-}
+            playerMoveLoop("right")
+        }}
+    else{console.log("not valid input")}
+} 
+
+
 
 function playerMoveLoop(dir){
     if (!movementInterval){
@@ -565,6 +550,60 @@ init()
 //             }
 //     }, playerSpeed)}
 //}
+
+
+// function movePlayer(e){
+//     console.log(e);
+//     if(e.code === "KeyW"){
+//         startMovement("up");
+//         console.log("up")}
+//     else if(e.code === "KeyA"){
+//         startMovement("left");
+//         console.log("left")}
+//     else if(e.code === "KeyS"){
+//         startMovement("down");
+//         console.log("down")}
+//     else if(e.code === "KeyD"){
+//         startMovement("right");
+//         console.log("right")}
+//     else{console.log("not valid input")}
+// } 
+
+// function startMovement(dir){
+//     if (dir === "up"){
+//         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
+//             clearInterval(movementInterval)
+//             movementInterval = 0
+//             playerMoveLoop(dir)
+//         }
+//         else(console.log("wall in the way"))
+//     }
+//     else if (dir === "left"){
+//         if (!cells[pacmanIndex-1].classList.contains("wall")){
+//             clearInterval(movementInterval)
+//             movementInterval = 0
+//             playerMoveLoop(dir)
+//         }
+//         else{console.log("wall in the way")}
+//     }
+//     else if(dir === "down"){
+//         if (!cells[pacmanIndex + mapWidth].classList.contains("wall")){
+//             clearInterval(movementInterval)
+//             movementInterval = 0
+//             playerMoveLoop(dir)
+//         }
+//         else{console.log("wall in the way")}
+//     }
+//     else if(dir === "right"){
+//         if (!cells[pacmanIndex+1].classList.contains("wall")){
+//             clearInterval(movementInterval)
+//             movementInterval = 0
+//             playerMoveLoop(dir)
+//         }
+//         else{console.log("wall in the way")}
+//     }
+// }
+
 
 // function findNumOfPaths(ghostObj){
 //     let options = 0;
