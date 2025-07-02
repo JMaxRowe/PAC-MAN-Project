@@ -1,14 +1,14 @@
-// const layout = [
-//     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-//     1, 2, 4, 0, 0, 0, 0, 0, 2, 1,
-//     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
-//     1, 0, 1, 0, 0, 3, 0, 1, 0, 1,
-//     1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
-//     1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-//     1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-// ];
+const layout0 = [
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 2, 4, 0, 0, 0, 0, 0, 2, 1,
+    1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+    1, 0, 1, 0, 0, 3, 0, 1, 0, 1,
+    1, 0, 1, 0, 1, 1, 0, 1, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+];
 
-const layout = [
+const layout1 = [
   1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
   1,2,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,
   1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
@@ -88,7 +88,7 @@ const ghosts = [
 const redGhost = ghosts[0]
 
 
-function createMap() {
+function createMap(layout) {
     layout.forEach((cellType, index) => {
         const cell = document.createElement("div");
         cell.dataset.index = index;
@@ -144,7 +144,7 @@ function init(){
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
-    createMap()
+    createMap(layout1)
     addPacMan()
     addRedGhost()
     calculatePellets()
@@ -363,6 +363,7 @@ function checkForPacman(ghostObj){
 function checkForGhost(){
     const collidedGhost = ghosts.find(ghost=> ghost.index === pacmanIndex)
     if(cells[pacmanIndex].classList.contains("scaredGhost")){
+        score += 100
         eatGhost(collidedGhost)
     }
     else if(cells[pacmanIndex].classList.contains("redGhost")){
@@ -371,7 +372,6 @@ function checkForGhost(){
 }
 
 function eatGhost(ghostObj){
-    score =+ 100
     cells[ghostObj.index].classList.remove("scaredGhost", ghostObj.className)
     clearInterval(ghostObj.interval)
     ghostObj.interval = 0
