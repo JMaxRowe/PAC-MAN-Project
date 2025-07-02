@@ -22,9 +22,9 @@ const layout1 = [
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
   1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,5,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,0,0,0,0,0,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,1,1,1,1,1,0,1,
+  1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
@@ -177,6 +177,31 @@ function addGhosts(layout){
     })
 }
 
+function moveGhostsFromSpawnRoom(){
+    ghosts.forEach((ghost, idx)=>{
+        let delay = (idx + 1) * 10000
+        let ghostTimeOut = setTimeout(() =>{
+            clearInterval(ghost.interval)
+            ghost.interval = 0;
+            if(!ghost.interval){
+                ghost.interval = setInterval(()=>{
+                    if (cells[ghost.index].classList.contains("pellet")){
+                        clearInterval(ghost.interval);
+                        ghost.interval = 0;
+                        moveGhost(ghost)
+                    }
+                    else{
+                        let newPosition = ghost.index - mapWidth;
+                        cells[ghost.index].classList.remove(ghost.className)
+                        cells[newPosition].classList.add(ghost.className)
+                        ghost.index -= mapWidth
+                    }
+                }, ghost.speed)
+            }
+        }, delay)})
+    
+}
+
 
 
 function init(){
@@ -190,6 +215,7 @@ function init(){
     calculatePellets(layout1)
     // moveGhost(redGhost)
     ghosts.forEach(moveGhost)
+    moveGhostsFromSpawnRoom()
 }
 
 function calculatePellets(layout){
