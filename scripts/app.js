@@ -155,7 +155,7 @@ function calculatePellets(){
     pelletCount = 0
     layout.forEach((cell) => {
         pelletCount;
-        if (cell === 0){
+        if (cell === 0 || cell === 2){
             pelletCount += 1}
         
     })
@@ -248,6 +248,7 @@ function eatPellet(){
 
 function powerPellet(){
     score += 50
+    pelletCount -= 1
     playerSpeed = powerSpeed
     cells[pacmanIndex].classList.remove("powerPellet")
     ghosts.forEach((ghost)=>{
@@ -264,11 +265,8 @@ function powerPellet(){
 
 
 function moveGhost(ghostObj){
-//checkDirections
     let validDirs = checkGhostDirections(ghostObj);
-//pickDirection
     let newDir = pickDirection(validDirs);
-//startGhostMovement
     startGhostMovement(ghostObj, newDir);
 }
 
@@ -299,10 +297,7 @@ function startGhostMovement(ghostObj, dir){
     if (!ghostObj.interval){
         ghostObj.interval = setInterval(() =>{
             let newPosition = movePosition(ghostObj, dir)
-            if (pelletCount === 0){
-                wonGame();
-            }
-            else if (!cells[newPosition].classList.contains("wall")){
+            if (!cells[newPosition].classList.contains("wall")){
                 if (cells[ghostObj.index].classList.contains("scaredGhost")){
                     cells[ghostObj.index].classList.remove(ghostObj.className, "scaredGhost")
                     cells[newPosition].classList.add(ghostObj.className, "scaredGhost")
