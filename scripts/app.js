@@ -50,6 +50,7 @@ let currentSpeed = playerSpeed;
 let currentDirection;
 let movementInterval;
 let currentMap = layout1
+let gameIsRunning = true;
 
 let score = 0;
 let pelletCount = 0;
@@ -110,7 +111,6 @@ const ghosts = [
     startingIndex: null,
 },
 ]
-const redGhost = ghosts[0]
 
 
 function createMap(layout) {
@@ -181,9 +181,9 @@ function addGhosts(layout){
 
 function moveGhostsFromSpawnRoom(){
     ghosts.forEach((ghost, idx)=>{
-        let delay = (idx + 1) * 10000
+        let delay = idx * 10000
         let ghostTimeOut = setTimeout(() =>{
-            clearInterval(ghost.interval)
+            if(gameIsRunning){clearInterval(ghost.interval)
             ghost.interval = 0;
             if(!ghost.interval){
                 ghost.interval = setInterval(()=>{
@@ -199,7 +199,8 @@ function moveGhostsFromSpawnRoom(){
                         ghost.index -= mapWidth
                     }
                 }, ghost.speed)
-            }
+            }}
+            
         }, delay)})
     
 }
@@ -207,6 +208,7 @@ function moveGhostsFromSpawnRoom(){
 
 
 function init(){
+    gameIsRunning = true;
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
@@ -216,14 +218,13 @@ function init(){
     // addRedGhost(layout1)
     calculatePellets(currentMap)
     // moveGhost(redGhost)
-    ghosts.forEach(moveGhost)
     moveGhostsFromSpawnRoom()
 }
 
 function calculatePellets(layout){
     pelletCount = 0
     layout.forEach((cell) => {
-        if (cell === 0 || cell === 2){
+        if (cell === 0 || cell === 2 || cell === 5){
             pelletCount += 1}
         
     })
@@ -310,15 +311,15 @@ function eatPellet(){
         pelletCount -= 1;
     }
     else if (cells[pacmanIndex].classList.contains("powerPellet")){
+        cells[pacmanIndex].classList.remove("powerPellet");
+        score += 50
+        pelletCount -= 1
         powerPellet()
     }
 }
 
 function powerPellet(){
-    score += 50
-    pelletCount -= 1
     playerSpeed = powerSpeed
-    cells[pacmanIndex].classList.remove("powerPellet")
     ghosts.forEach((ghost)=>{
         cells[ghost.index].classList.add("scaredGhost")
     })
@@ -461,7 +462,10 @@ function loseLife(){
     redGhost.interval = 0;
     lives --;
     loseHeart()
-    if(lives===0){loseGame()}
+    if(lives===0){
+        loseGame()
+        gameIsRunning = false
+    }
     else{resetPositions()}
 }
 
@@ -505,14 +509,14 @@ function restart(){
     hideDisplays()
     lives = 3
     score = 0
-    
+    gameIsRunning = true;
     setHearts()
     scoreDisplay.innerHTML = score
     removeAllSprites()
     addPacMan(currentMap)
     document.addEventListener("keydown", movePlayer)
     addGhosts(currentMap)
-    addPellets()
+    addPellets(currentMap)
     calculatePellets(currentMap)
     moveGhostsFromSpawnRoom()
 }
@@ -537,7 +541,7 @@ function setHearts() {
     });
 }
 
-function addPellets(){
+function addPellets(layout){
     layout.forEach((cellType, index) => {
         const cell = cells[index]
         if (cellType === 0) {
