@@ -454,7 +454,10 @@ function loseLife(){
     document.removeEventListener("keydown", movePlayer)
     clearInterval(movementInterval)
     movementInterval = 0;
-    clearInterval(redGhost.interval)
+    ghosts.forEach((ghost)=>{
+        clearInterval(ghost.interval)
+        ghost.interval = 0
+    })
     redGhost.interval = 0;
     lives --;
     loseHeart()
@@ -473,7 +476,6 @@ function resetPositions(){
     cells[pacmanIndex].classList.remove("pacman")
     pacmanIndex = pacmanStartingIndex;
     cells[pacmanStartingIndex].classList.add("pacman")
-    
     ghosts.forEach((ghost)=>{
         cells[ghost.index].classList.remove(ghost.className);
         ghost.index = ghost.startingIndex
