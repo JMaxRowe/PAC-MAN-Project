@@ -20,7 +20,7 @@ const layout1 = [
   1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,2,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,2,1,
   1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
   1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,1,1,
   1,0,0,0,0,0,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,0,0,0,0,0,0,1,
@@ -49,6 +49,7 @@ let playerSpeed = 200;
 let currentSpeed = playerSpeed;
 let currentDirection;
 let movementInterval;
+let currentMap = layout1
 
 let score = 0;
 let pelletCount = 0;
@@ -136,7 +137,7 @@ function createMap(layout) {
             cell.classList.add("path")
         }
         else if (cellType === 5){
-            cell.classList.add("path")
+            cell.classList.add("path", "pellet", "spawnPoint")
         }
 
         grid.appendChild(cell);
@@ -173,7 +174,8 @@ function addGhosts(layout){
     })
     ghosts.forEach((ghost, index) =>{
         cells[ghostSpawns[index]].classList.add(ghost.className);
-        ghost.index = ghostSpawns [index]
+        ghost.index = ghostSpawns[index]
+        ghost.startingIndex = ghost.index
     })
 }
 
@@ -185,7 +187,7 @@ function moveGhostsFromSpawnRoom(){
             ghost.interval = 0;
             if(!ghost.interval){
                 ghost.interval = setInterval(()=>{
-                    if (cells[ghost.index].classList.contains("pellet")){
+                    if (cells[ghost.index].classList.contains("spawnPoint")){
                         clearInterval(ghost.interval);
                         ghost.interval = 0;
                         moveGhost(ghost)
@@ -208,11 +210,11 @@ function init(){
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
-    createMap(layout1)
-    addPacMan(layout1)
-    addGhosts(layout1)
+    createMap(currentMap)
+    addPacMan(currentMap)
+    addGhosts(currentMap)
     // addRedGhost(layout1)
-    calculatePellets(layout1)
+    calculatePellets(currentMap)
     // moveGhost(redGhost)
     ghosts.forEach(moveGhost)
     moveGhostsFromSpawnRoom()
@@ -221,7 +223,6 @@ function init(){
 function calculatePellets(layout){
     pelletCount = 0
     layout.forEach((cell) => {
-        pelletCount;
         if (cell === 0 || cell === 2){
             pelletCount += 1}
         
@@ -433,7 +434,7 @@ function checkForGhost(){
         score += 100
         eatGhost(collidedGhost)
     }
-    else if(cells[pacmanIndex].classList.contains("redGhost")){
+    else if(ghosts.some(ghost => cells[pacmanIndex].classList.contains(ghost.className))){
         loseLife()
     }
 }
@@ -483,7 +484,7 @@ function resetPositions(){
 }
 function activateSprites(){
     document.addEventListener("keydown", movePlayer)
-    moveGhost(redGhost)
+    moveGhostsFromSpawnRoom()
 }
 
 function wonGame(){
@@ -506,12 +507,12 @@ function restart(){
     setHearts()
     scoreDisplay.innerHTML = score
     removeAllSprites()
-    addPacMan(layout1)
+    addPacMan(currentMap)
     document.addEventListener("keydown", movePlayer)
-    addRedGhost(layout1)
+    addGhosts(currentMap)
     addPellets()
-    calculatePellets()
-    moveGhost(redGhost)
+    calculatePellets(currentMap)
+    moveGhostsFromSpawnRoom()
 }
 
 function hideDisplays(){
