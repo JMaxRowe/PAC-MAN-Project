@@ -111,6 +111,26 @@ main{
     background-position: center;
     background-repeat: no-repeat;
 }
+#grid div.pinkGhost{
+    background-image: url('../assets/Pinky.png'); 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#grid div.orangeGhost{
+    background-image: url('../assets/clyde.png'); 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#grid div.blueGhost{
+    background-image: url('../assets/blueGhost.png'); 
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
 #grid div.scaredGhost{
     background-image: url('../assets/Pacman_Vulnerable_Ghost.webp'); 

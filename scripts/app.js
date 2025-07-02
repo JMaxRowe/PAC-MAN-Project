@@ -20,9 +20,9 @@ const layout1 = [
   1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,2,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
   1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,1,1,1,1,1,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,1,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,5,1,1,1,1,0,1,1,1,1,1,1,1,
   1,0,0,0,0,0,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,0,0,0,0,0,0,1,
   1,0,1,1,1,1,0,1,1,1,1,5,5,5,5,5,1,1,1,1,0,1,1,1,1,1,0,1,
   1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
@@ -78,8 +78,32 @@ const livesDisplay = document.querySelector(".lives")
 const ghosts = [
 {
     index: null,
-    speed: 200,
+    speed: 175,
     className: "redGhost",
+    interval: 0,
+    previousIndex: null,
+    startingIndex: null,
+},
+{
+    index: null,
+    speed: 200,
+    className: "pinkGhost",
+    interval: 0,
+    previousIndex: null,
+    startingIndex: null,
+},
+{
+    index: null,
+    speed: 200,
+    className: "orangeGhost",
+    interval: 0,
+    previousIndex: null,
+    startingIndex: null,
+},
+{
+    index: null,
+    speed: 200,
+    className: "blueGhost",
     interval: 0,
     previousIndex: null,
     startingIndex: null,
@@ -92,7 +116,6 @@ function createMap(layout) {
     layout.forEach((cellType, index) => {
         const cell = document.createElement("div");
         cell.dataset.index = index;
-        // cell.innerText = index;
         cell.classList.add("cell")
 
         if (cellType === 1) {
@@ -121,7 +144,7 @@ function createMap(layout) {
     });
 }
 
-function addPacMan(){
+function addPacMan(layout){
     layout.forEach((cellType, index) =>{
         if (cellType === 3) {
             cells[index].classList.add("pacman");
@@ -131,7 +154,7 @@ function addPacMan(){
     })
 }
 
-function addRedGhost(ghostObj){
+function addRedGhost(layout){
     layout.forEach((cellType, index) =>{
         if (cellType === 4) {
             cells[index].classList.add("redGhost");
@@ -140,18 +163,36 @@ function addRedGhost(ghostObj){
         }
     })
 }
+
+function addGhosts(layout){
+    let ghostSpawns = [];
+    layout.forEach((cellType, index) =>{
+        if (cellType === 4){
+            ghostSpawns.push(index);
+        }
+    })
+    ghosts.forEach((ghost, index) =>{
+        cells[ghostSpawns[index]].classList.add(ghost.className);
+        ghost.index = ghostSpawns [index]
+    })
+}
+
+
+
 function init(){
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
     createMap(layout1)
-    addPacMan()
-    addRedGhost()
-    calculatePellets()
-    moveGhost(redGhost)
+    addPacMan(layout1)
+    addGhosts(layout1)
+    // addRedGhost(layout1)
+    calculatePellets(layout1)
+    // moveGhost(redGhost)
+    ghosts.forEach(moveGhost)
 }
 
-function calculatePellets(){
+function calculatePellets(layout){
     pelletCount = 0
     layout.forEach((cell) => {
         pelletCount;
@@ -424,7 +465,6 @@ function wonGame(){
     movementInterval=0;
     winScreen.style.display = "flex";
     finalScoreDisplay.innerHTML = score;
-    console.log("you won the game")
 }
 
 function loseGame(){
@@ -440,9 +480,9 @@ function restart(){
     setHearts()
     scoreDisplay.innerHTML = score
     removeAllSprites()
-    addPacMan()
+    addPacMan(layout1)
     document.addEventListener("keydown", movePlayer)
-    addRedGhost()
+    addRedGhost(layout1)
     addPellets()
     calculatePellets()
     moveGhost(redGhost)
