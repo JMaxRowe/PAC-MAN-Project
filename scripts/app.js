@@ -459,7 +459,6 @@ function loseLife(){
         clearInterval(ghost.interval)
         ghost.interval = 0
     })
-    redGhost.interval = 0;
     lives --;
     loseHeart()
     if(lives===0){
@@ -485,12 +484,12 @@ function resetPositions(){
         ghost.index = ghost.startingIndex
         cells[ghost.index].classList.add(ghost.className);
         activateSprites()
+        moveGhostsFromSpawnRoom()
     })
 }, 2000)
 }
 function activateSprites(){
     document.addEventListener("keydown", movePlayer)
-    moveGhostsFromSpawnRoom()
 }
 
 function wonGame(){
@@ -512,13 +511,13 @@ function restart(){
     gameIsRunning = true;
     setHearts()
     scoreDisplay.innerHTML = score
-    removeAllSprites()
-    addPacMan(currentMap)
+    resetPositions()
+    // addPacMan(currentMap)
     document.addEventListener("keydown", movePlayer)
-    addGhosts(currentMap)
+    // addGhosts(currentMap)
     addPellets(currentMap)
     calculatePellets(currentMap)
-    moveGhostsFromSpawnRoom()
+    // moveGhostsFromSpawnRoom()
 }
 
 function hideDisplays(){
