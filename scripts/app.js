@@ -20,13 +20,13 @@ const layout1 = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
     1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-    1,2,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,2,1,
-    1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,0,0,0,0,0,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-    1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
+    1,2,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,2,1,
+    1,1,1,1,1,1,0,1,1,5,1,1,1,1,1,1,1,5,1,1,0,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,0,1,1,5,1,4,4,4,4,4,1,5,1,1,0,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,1,1,5,1,4,4,4,4,4,1,5,1,1,0,0,0,0,0,0,0,1,
+    1,0,1,1,1,1,0,1,1,5,1,1,1,1,1,1,1,5,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,0,0,5,5,5,5,3,5,5,5,5,0,0,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
     1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
     1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
     1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
@@ -111,6 +111,7 @@ const ghosts = [
     className: "redGhost",
     interval: 0,
     timeOut: 0,
+    delay: 0,
     previousIndex: null,
     startingIndex: null,
 },
@@ -120,6 +121,7 @@ const ghosts = [
     className: "pinkGhost",
     interval: 0,
     timeOut: 0,
+    delay: 5000,
     previousIndex: null,
     startingIndex: null,
 },
@@ -129,21 +131,23 @@ const ghosts = [
     className: "orangeGhost",
     interval: 0,
     timeOut: 0,
+    delay: 10000,
     previousIndex: null,
     startingIndex: null,
 },
 {
     index: null,
-    speed: 200,
+    speed: 225,
     className: "blueGhost",
     interval: 0,
     timeOut: 0,
+    delay: 15000,
     previousIndex: null,
     startingIndex: null,
 },
 ]
 
-function createMap2(layout){
+function createMap(layout){
     layout.forEach((cellType, index)=>{
         const cell = document.createElement("div");
         cell.dataset.index = index;
@@ -245,7 +249,7 @@ function addGhosts(layout){
 // }
 
 
-function moveOneGhostFromSpawnRoom(ghostObj){
+function moveOneGhostFromSpawnRoom(ghostObj, delay){
     stopGhost(ghostObj);
     ghostObj.timeOut = setTimeout(()=>{
         ghostObj.interval = setInterval(()=>{
@@ -262,9 +266,14 @@ function moveOneGhostFromSpawnRoom(ghostObj){
                 ghostObj.index -= mapWidth
             }
         }, ghostObj.speed)
-    }, 5000)
+    }, delay)
 }
 
+function moveAllGhostsFromSpawnRoom(){
+    ghosts.forEach((ghost)=>{
+        moveOneGhostFromSpawnRoom(ghost, ghost.delay)
+    })
+}
 
 
 function init(){
@@ -273,16 +282,14 @@ function init(){
     setHearts()
     scoreDisplay.innerHTML = score
     // createMap(currentMap)
-    createMap2(currentMap)
+    createMap(currentMap)
     addPacMan(currentMap)
     addGhosts(currentMap)
     // addRedGhost(layout1)
     calculatePellets(currentMap)
     // moveGhost(redGhost)
     // moveGhostsFromSpawnRoom()
-    ghosts.forEach((ghost)=>{
-        moveOneGhostFromSpawnRoom(ghost)
-    })
+    moveAllGhostsFromSpawnRoom()
 }
 
 function calculatePellets(layout){
@@ -516,7 +523,7 @@ function checkForPacman(ghostObj){
 
 function checkForGhost(){
     const collidedGhost = ghosts.find(ghost=> ghost.index === pacmanIndex)
-    if(grid.classList.contains("scared")){
+    if(grid.classList.contains("scared") && collidedGhost){
         score += 100
         eatGhost(collidedGhost)
     }
@@ -531,7 +538,7 @@ function eatGhost(ghostObj){
     ghostObj.index = ghostObj.startingIndex;
     setTimeout(()=>{
         cells[ghostObj.startingIndex].classList.add(ghostObj.className);
-        moveOneGhostFromSpawnRoom(ghostObj)
+        moveOneGhostFromSpawnRoom(ghostObj, 4000)
     },1000)
 }
 
@@ -563,8 +570,7 @@ function resetPositions(){
         addPacMan(currentMap)
         addGhosts(currentMap)
         activateSprites();
-        moveGhostsFromSpawnRoom();
-   
+        moveAllGhostsFromSpawnRoom()
 }, 2000)
 }
 function activateSprites(){
@@ -596,7 +602,7 @@ function restart(){
     addGhosts(currentMap)
     addPellets(currentMap)
     calculatePellets(currentMap)
-    moveGhostsFromSpawnRoom()
+    moveAllGhostsFromSpawnRoom()
 }
 
 function hideDisplays(){
