@@ -12,6 +12,7 @@
 </head>
 <body>
     <h1>PAC-MAN</h1>
+    <div class="muteButton"></div>
     <section class="winScreen">
         <div class="winMessage">YOU WON!!</div>
         <div class="finalScore">FINAL SCORE: <span id="finalScoreValue"></span></div>
@@ -21,6 +22,13 @@
         <div class="loseMessage">GAME OVER, YOU LOST!</div>
         <div class="loserScore">FINAL SCORE: <span id="loserScoreValue"></span></div>
         <div class="retryButton">TRY AGAIN?</div>
+    </section>
+    <section class="startScreen">
+        <div class="startmessage"></div>
+        <div class="nameRequest">
+            <input type="text" id="playerName" maxLength="3" placeholder="ABC">
+        </div>
+        <div class="startButton">START</div>
     </section>
     <main id="gridArea">
         <div class="gameInfo">
@@ -39,6 +47,10 @@
             <div>S = Down</div>
             <div>D = Right</div>
         </div>
+        <section class="HighScore">
+            <div class="ScoresHeading"></div>
+            <div class="scores"></div>
+        </section>
     </main>
 </body>
 </html>

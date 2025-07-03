@@ -55,11 +55,15 @@ let gameIsRunning = true;
 let score = 0;
 let pelletCount = 0;
 let lives = 3
+let defaultVolume = 0.2;
+let isMuted = false;
 
 let ghostSpeed = 200;
 let previousGhostIndex;
 let ghostMovementInterval;
 let powerPelletTimeout;
+
+let playerName = "";
 
 const startingSpeed = 200;
 const powerSpeed = 100;
@@ -76,6 +80,11 @@ const loserScoreValue = document.getElementById("loserScoreValue");
 const tryAgainButton = document.querySelector(".retryButton");
 const playAgainButton = document.querySelector(".restart");
 const livesDisplay = document.querySelector(".lives")
+const muteButton = document.querySelector(".muteButton")
+
+const startScreen = document.querySelector(".startScreen");
+const startButton = document.querySelector(".startButton");
+const nameInput = document.getElementById("playerName");
 
 const munchSound = new Audio("../assets/sounds/Pacman_Munch.mp3");
 const pacmanBeginning = new Audio("../assets/sounds/pacman_beginning.wav");
@@ -83,6 +92,16 @@ const PacmanDeath = new Audio("../assets/sounds/pacman_death.wav");
 const PacmanIntermission = new Audio("../assets/sounds/pacman_intermission.wav");
 const PacmanEatGhost = new Audio("../assets/sounds/pacman_eatghost.wav");
 const powerPelletSound = new Audio("../assets/sounds/Pac Man Power Pellet.mp3")
+const allSounds = [
+    munchSound, 
+    pacmanBeginning, 
+    PacmanDeath, 
+    PacmanIntermission, 
+    PacmanEatGhost,
+    powerPelletSound,
+]
+allSounds.forEach((sound)=>{sound.volume = defaultVolume})
+
 
 let cellTypes = [
     {
@@ -201,6 +220,16 @@ function createMap(layout){
 // }
 
 
+function toggleMute() {
+    isMuted = !isMuted;
+
+    allSounds.forEach(sound => {
+        sound.volume = isMuted ? 0 : defaultVolume;
+    });
+    muteButton.classList.toggle("muted", isMuted);
+}
+
+
 
 function addPacMan(layout){
     layout.forEach((cellType, index) =>{
@@ -288,14 +317,15 @@ function init(){
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
-    // createMap(currentMap)
+}
+
+function startGame(){
+    startScreen.style.display = "none",
     createMap(currentMap)
+    calculatePellets(currentMap)
+    addPlayerName()
     addPacMan(currentMap)
     addGhosts(currentMap)
-    // addRedGhost(layout1)
-    calculatePellets(currentMap)
-    // moveGhost(redGhost)
-    // moveGhostsFromSpawnRoom()
     moveAllGhostsFromSpawnRoom()
     pacmanBeginning.play();
 }
@@ -656,13 +686,20 @@ function addPellets(layout){
     });
 }
 
+function addPlayerName(){
+    const name = nameInput.value.toUpperCase()
+    playerName = name
+    console.log(name)
+}
+
+
 
 document.addEventListener("keydown", movePlayer)
 
 tryAgainButton.addEventListener("click", restart)
 playAgainButton.addEventListener("click", restart)
-
-
+muteButton.addEventListener("click", toggleMute)
+startButton.addEventListener("click", startGame)
 
 init()
 
