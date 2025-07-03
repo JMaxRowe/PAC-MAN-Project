@@ -9,34 +9,34 @@ const layout0 = [
 ];
 
 const layout1 = [
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-  1,2,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,
-  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
-  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
-  1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
-  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,2,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,2,1,
-  1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,0,0,0,0,0,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
-  1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
-  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
-  1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
-  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    1,2,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,
+    1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+    1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+    1,0,1,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,0,1,1,1,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,2,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,2,1,
+    1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,0,0,0,0,0,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,4,4,4,4,4,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+    1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+    1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,
+    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1,
+    1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ];
 
 
@@ -110,6 +110,7 @@ const ghosts = [
     speed: 175,
     className: "redGhost",
     interval: 0,
+    timeOut: 0,
     previousIndex: null,
     startingIndex: null,
 },
@@ -118,6 +119,7 @@ const ghosts = [
     speed: 200,
     className: "pinkGhost",
     interval: 0,
+    timeOut: 0,
     previousIndex: null,
     startingIndex: null,
 },
@@ -126,6 +128,7 @@ const ghosts = [
     speed: 200,
     className: "orangeGhost",
     interval: 0,
+    timeOut: 0,
     previousIndex: null,
     startingIndex: null,
 },
@@ -134,6 +137,7 @@ const ghosts = [
     speed: 200,
     className: "blueGhost",
     interval: 0,
+    timeOut: 0,
     previousIndex: null,
     startingIndex: null,
 },
@@ -144,9 +148,7 @@ function createMap2(layout){
         const cell = document.createElement("div");
         cell.dataset.index = index;
         const typeEntry = cellTypes.find(t => t.cellNum === cellType);
-        if (typeEntry) {
             cell.classList.add(...typeEntry.className);
-        }
         grid.appendChild(cell);
         cells.push(cell);
     })
@@ -155,37 +157,37 @@ function createMap2(layout){
 
 
 
-function createMap(layout) {
-    layout.forEach((cellType, index) => {
-        const cell = document.createElement("div");
-        cell.dataset.index = index;
-        cell.classList.add("cell")
+// function createMap(layout) {
+//     layout.forEach((cellType, index) => {
+//         const cell = document.createElement("div");
+//         cell.dataset.index = index;
+//         cell.classList.add("cell")
 
-        if (cellType === 1) {
-        cell.classList.add("wall");
-        } 
-        else if (cellType === 0) {
-        cell.classList.add("path");
-        cell.classList.add("pellet");
-        }
-        else if(cellType === 2){
-            cell.classList.add("path");
-            cell.classList.add("powerPellet")
-        }
-        else if(cellType === 3) {
-            cell.classList.add("path");
-        }
-        else if(cellType === 4){
-            cell.classList.add("path")
-        }
-        else if (cellType === 5){
-            cell.classList.add("path", "pellet", "spawnPoint")
-        }
+//         if (cellType === 1) {
+//         cell.classList.add("wall");
+//         } 
+//         else if (cellType === 0) {
+//         cell.classList.add("path");
+//         cell.classList.add("pellet");
+//         }
+//         else if(cellType === 2){
+//             cell.classList.add("path");
+//             cell.classList.add("powerPellet")
+//         }
+//         else if(cellType === 3) {
+//             cell.classList.add("path");
+//         }
+//         else if(cellType === 4){
+//             cell.classList.add("path")
+//         }
+//         else if (cellType === 5){
+//             cell.classList.add("path", "pellet", "spawnPoint")
+//         }
 
-        grid.appendChild(cell);
-        cells.push(cell);
-    });
-}
+//         grid.appendChild(cell);
+//         cells.push(cell);
+//     });
+// }
 
 
 
@@ -217,10 +219,11 @@ function addGhosts(layout){
 
 function moveGhostsFromSpawnRoom(){
     ghosts.forEach((ghost, idx)=>{
-        let delay = idx * 10000
-        let ghostTimeOut = setTimeout(() =>{
-            if(gameIsRunning){clearInterval(ghost.interval)
-            ghost.interval = 0;
+        stopGhost(ghost);
+        let delay = idx * 1000
+        ghostTimeOut = setTimeout(() =>{
+            if(gameIsRunning){
+            stopGhost(ghost)
             if(!ghost.interval){
                 ghost.interval = setInterval(()=>{
                     if (cells[ghost.index].classList.contains("spawnPoint")){
@@ -242,11 +245,13 @@ function moveGhostsFromSpawnRoom(){
 }
 
 function moveOneGhostFromSpawnRoom(ghostObj){
-    let ghostTimeout = setTimeout(()=>{
+    stopGhost(ghostObj);
+    ghostObj.timeOut = setTimeout(()=>{
         ghost.interval = setInterval(()=>{
             if(cells[ghostObj.index].classList.contains("spawnPoint")){
-                clearInterval(ghost.interval);
-                ghost.interval = 0
+                clearInterval(
+                ghostObj.interval);
+                ghostObj.interval = 0
                 moveGhost(ghostObj)
             }
             else{
@@ -278,7 +283,7 @@ function init(){
 function calculatePellets(layout){
     pelletCount = 0
     layout.forEach((cell) => {
-        if (cell === 0 || cell === 2 || cell === 5){
+        if (cell === 0 || cell === 2){
             pelletCount += 1}
         
     })
@@ -415,6 +420,17 @@ function pickDirection(dirs){
     return dirs[randnum]
 }
 
+function stopGhost(ghostObj){
+    if(ghostObj.interval){
+        clearInterval(ghostObj.interval);
+        ghostObj.interval=0;
+    }
+    if(ghostObj.timeOut){
+        clearTimeout(ghostObj.timeOut);
+        ghostObj.TimeOut = 0;
+    }
+}
+
 
 function startGhostMovement(ghostObj, dir){
     if (!ghostObj.interval){
@@ -495,9 +511,8 @@ function checkForGhost(){
 }
 
 function eatGhost(ghostObj){
+    stopGhost(ghostObj)
     cells[ghostObj.index].classList.remove("scaredGhost", ghostObj.className)
-    clearInterval(ghostObj.interval)
-    ghostObj.interval = 0
     ghostObj.index = ghostObj.startingIndex;
     setTimeout(()=>{
         cells[ghostObj.startingIndex].classList.add(ghostObj.className);
@@ -510,8 +525,7 @@ function loseLife(){
     clearInterval(movementInterval)
     movementInterval = 0;
     ghosts.forEach((ghost)=>{
-        clearInterval(ghost.interval)
-        ghost.interval = 0
+        stopGhost(ghost)
     })
     lives --;
     loseHeart()
@@ -530,16 +544,12 @@ function loseHeart(){
 
 function resetPositions(){
     setTimeout(() => {
-    cells[pacmanIndex].classList.remove("pacman")
-    pacmanIndex = pacmanStartingIndex;
-    cells[pacmanStartingIndex].classList.add("pacman")
-    ghosts.forEach((ghost)=>{
-        cells[ghost.index].classList.remove(ghost.className);
-        ghost.index = ghost.startingIndex
-        cells[ghost.index].classList.add(ghost.className);
-        activateSprites()
-        moveGhostsFromSpawnRoom()
-    })
+        removeAllSprites();
+        addPacMan(currentMap)
+        addGhosts(currentMap)
+        activateSprites();
+        moveGhostsFromSpawnRoom();
+   
 }, 2000)
 }
 function activateSprites(){
@@ -565,10 +575,10 @@ function restart(){
     gameIsRunning = true;
     setHearts()
     scoreDisplay.innerHTML = score
-    resetPositions()
-    // addPacMan(currentMap)
+    removeAllSprites()
+    addPacMan(currentMap)
     document.addEventListener("keydown", movePlayer)
-    // addGhosts(currentMap)
+    addGhosts(currentMap)
     addPellets(currentMap)
     calculatePellets(currentMap)
     moveGhostsFromSpawnRoom()
@@ -580,8 +590,12 @@ function hideDisplays(){
 }
 
 function removeAllSprites() {
+    const ghostClasses = []
+    ghosts.forEach((ghost)=>{
+        ghostClasses.push(ghost.className)
+    })
     cells.forEach(cell => {
-        cell.classList.remove("pacman", "redGhost", "scaredGhost");
+        cell.classList.remove("pacman", ...ghostClasses, "scaredGhost");
     });
 }
 
