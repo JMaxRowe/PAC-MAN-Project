@@ -96,7 +96,7 @@ let cellTypes = [
     },
         {
         cellNum: 4,
-        className: ["path"],
+        className: ["spawnRoom"],
     },
     {
         cellNum: 5,
@@ -217,37 +217,38 @@ function addGhosts(layout){
     })
 }
 
-function moveGhostsFromSpawnRoom(){
-    ghosts.forEach((ghost, idx)=>{
-        stopGhost(ghost);
-        let delay = idx * 1000
-        ghostTimeOut = setTimeout(() =>{
-            if(gameIsRunning){
-            stopGhost(ghost)
-            if(!ghost.interval){
-                ghost.interval = setInterval(()=>{
-                    if (cells[ghost.index].classList.contains("spawnPoint")){
-                        clearInterval(ghost.interval);
-                        ghost.interval = 0;
-                        moveGhost(ghost)
-                    }
-                    else{
-                        let newPosition = ghost.index - mapWidth;
-                        cells[ghost.index].classList.remove(ghost.className)
-                        cells[newPosition].classList.add(ghost.className)
-                        ghost.index -= mapWidth
-                    }
-                }, ghost.speed)
-            }}
+// function moveGhostsFromSpawnRoom(){
+//     ghosts.forEach((ghost, idx)=>{
+//         stopGhost(ghost);
+//         let delay = idx * 1000
+//         ghostTimeOut = setTimeout(() =>{
+//             if(gameIsRunning){
+//             stopGhost(ghost)
+//             if(!ghost.interval){
+//                 ghost.interval = setInterval(()=>{
+//                     if (cells[ghost.index].classList.contains("spawnPoint")){
+//                         clearInterval(ghost.interval);
+//                         ghost.interval = 0;
+//                         moveGhost(ghost)
+//                     }
+//                     else{
+//                         let newPosition = ghost.index - mapWidth;
+//                         cells[ghost.index].classList.remove(ghost.className)
+//                         cells[newPosition].classList.add(ghost.className)
+//                         ghost.index -= mapWidth
+//                     }
+//                 }, ghost.speed)
+//             }}
             
-        }, delay)})
+//         }, delay)})
     
-}
+// }
+
 
 function moveOneGhostFromSpawnRoom(ghostObj){
     stopGhost(ghostObj);
     ghostObj.timeOut = setTimeout(()=>{
-        ghost.interval = setInterval(()=>{
+        ghostObj.interval = setInterval(()=>{
             if(cells[ghostObj.index].classList.contains("spawnPoint")){
                 clearInterval(
                 ghostObj.interval);
@@ -265,6 +266,7 @@ function moveOneGhostFromSpawnRoom(ghostObj){
 }
 
 
+
 function init(){
     gameIsRunning = true;
     lives = 3
@@ -277,7 +279,10 @@ function init(){
     // addRedGhost(layout1)
     calculatePellets(currentMap)
     // moveGhost(redGhost)
-    moveGhostsFromSpawnRoom()
+    // moveGhostsFromSpawnRoom()
+    ghosts.forEach((ghost)=>{
+        moveOneGhostFromSpawnRoom(ghost)
+    })
 }
 
 function calculatePellets(layout){
@@ -377,17 +382,27 @@ function eatPellet(){
     }
 }
 
+// function powerPellet(){
+//     playerSpeed = powerSpeed
+//     ghosts.forEach((ghost)=>{
+//         cells[ghost.index].classList.add("scaredGhost")
+//     })
+//     clearTimeout(powerPelletTimeout)
+//     powerPelletTimeout = setTimeout(()=>{
+//         playerSpeed = startingSpeed
+//         ghosts.forEach((ghost)=>{
+//             cells[ghost.index].classList.remove("scaredGhost")
+//         })
+//     }, 5000)
+// }
+
 function powerPellet(){
     playerSpeed = powerSpeed
-    ghosts.forEach((ghost)=>{
-        cells[ghost.index].classList.add("scaredGhost")
-    })
+    grid.classList.add("scared")
     clearTimeout(powerPelletTimeout)
     powerPelletTimeout = setTimeout(()=>{
         playerSpeed = startingSpeed
-        ghosts.forEach((ghost)=>{
-            cells[ghost.index].classList.remove("scaredGhost")
-        })
+        grid.classList.remove("scared")
     }, 5000)
 }
 
@@ -491,7 +506,7 @@ if (directions.length > 1){
 
 
 function checkForPacman(ghostObj){
-    if(cells[ghostObj.index].classList.contains("scaredGhost")&&cells[ghostObj.index].classList.contains("pacman")){
+    if(grid.classList.contains("scared")&&cells[ghostObj.index].classList.contains("pacman")){
         eatGhost(ghostObj)
     }
     else if(cells[ghostObj.index].classList.contains("pacman")){
@@ -501,7 +516,7 @@ function checkForPacman(ghostObj){
 
 function checkForGhost(){
     const collidedGhost = ghosts.find(ghost=> ghost.index === pacmanIndex)
-    if(cells[pacmanIndex].classList.contains("scaredGhost")){
+    if(grid.classList.contains("scared")){
         score += 100
         eatGhost(collidedGhost)
     }
