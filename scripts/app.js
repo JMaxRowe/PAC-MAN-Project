@@ -77,6 +77,13 @@ const tryAgainButton = document.querySelector(".retryButton");
 const playAgainButton = document.querySelector(".restart");
 const livesDisplay = document.querySelector(".lives")
 
+const munchSound = new Audio("../assets/sounds/Pacman_Munch.mp3");
+const pacmanBeginning = new Audio("../assets/sounds/pacman_beginning.wav");
+const PacmanDeath = new Audio("../assets/sounds/pacman_death.wav");
+const PacmanIntermission = new Audio("../assets/sounds/pacman_intermission.wav");
+const PacmanEatGhost = new Audio("../assets/sounds/pacman_eatghost.wav");
+const powerPelletSound = new Audio("../assets/sounds/Pac Man Power Pellet.mp3")
+
 let cellTypes = [
     {
         cellNum : 0,
@@ -290,6 +297,7 @@ function init(){
     // moveGhost(redGhost)
     // moveGhostsFromSpawnRoom()
     moveAllGhostsFromSpawnRoom()
+    pacmanBeginning.play();
 }
 
 function calculatePellets(layout){
@@ -304,7 +312,7 @@ function calculatePellets(layout){
 
 function movePlayer(e){
     console.log(e);
-    if(e.code === "KeyW"){
+    if(e.code === "KeyW" || e.code === "ArrowUp"){
         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
@@ -380,6 +388,7 @@ function eatPellet(){
         score += 10;
         scoreDisplay.innerHTML = score;
         pelletCount -= 1;
+        munchSound.play();
     }
     else if (cells[pacmanIndex].classList.contains("powerPellet")){
         cells[pacmanIndex].classList.remove("powerPellet");
@@ -405,12 +414,14 @@ function eatPellet(){
 
 function powerPellet(){
     playerSpeed = powerSpeed
+    powerPelletSound.currentTime = 0;
+    powerPelletSound.play();
     grid.classList.add("scared")
     clearTimeout(powerPelletTimeout)
     powerPelletTimeout = setTimeout(()=>{
         playerSpeed = startingSpeed
         grid.classList.remove("scared")
-    }, 5000)
+    }, 9000)
 }
 
 
@@ -534,6 +545,7 @@ function checkForGhost(){
 
 function eatGhost(ghostObj){
     stopGhost(ghostObj)
+    PacmanEatGhost.play();
     cells[ghostObj.index].classList.remove("scaredGhost", ghostObj.className)
     ghostObj.index = ghostObj.startingIndex;
     setTimeout(()=>{
@@ -550,6 +562,7 @@ function loseLife(){
         stopGhost(ghost)
     })
     lives --;
+    PacmanDeath.play();
     loseHeart()
     if(lives===0){
         loseGame()
@@ -579,7 +592,9 @@ function activateSprites(){
 
 function wonGame(){
     clearInterval(movementInterval);
+    removeAllSprites();
     movementInterval=0;
+    PacmanIntermission.play();
     winScreen.style.display = "flex";
     finalScoreDisplay.innerHTML = score;
 }
