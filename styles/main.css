@@ -133,6 +133,22 @@ main{
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    transform: rotate(0deg);
+}
+
+#grid.down div.pacman{
+    background-image: url(/assets/PacMan\ Down.png);
+}
+
+#grid.up div.pacman{
+    background-image: url(/assets/PacMan\ Up.png);
+}
+#grid.right div.pacman{
+    background-image: url(/assets/PacMan\ right.png);
+}
+
+#grid.left div.pacman{
+    background-image: url(/assets/PacMan.png);
 }
 
 #grid div.redGhost{

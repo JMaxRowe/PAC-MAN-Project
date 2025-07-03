@@ -44,12 +44,13 @@ const layout1 = [
 
 
 let pacmanIndex;
-let pacmanStartingIndex
+let pacmanStartingIndex;
+let previousPacmanIndex;
 let playerSpeed = 200;
 let currentSpeed = playerSpeed;
 let currentDirection;
 let movementInterval;
-let currentMap = layout1
+let currentMap = layout1;
 let gameIsRunning = true;
 
 let score = 0;
@@ -91,7 +92,7 @@ const pacmanBeginning = new Audio("../assets/sounds/pacman_beginning.wav");
 const PacmanDeath = new Audio("../assets/sounds/pacman_death.wav");
 const PacmanIntermission = new Audio("../assets/sounds/pacman_intermission.wav");
 const PacmanEatGhost = new Audio("../assets/sounds/pacman_eatghost.wav");
-const powerPelletSound = new Audio("../assets/sounds/Pac Man Power Pellet.mp3")
+const powerPelletSound = new Audio("../assets/sounds/Pac Man Power Pellet.mp3");
 const allSounds = [
     munchSound, 
     pacmanBeginning, 
@@ -186,40 +187,6 @@ function createMap(layout){
 
 
 
-
-// function createMap(layout) {
-//     layout.forEach((cellType, index) => {
-//         const cell = document.createElement("div");
-//         cell.dataset.index = index;
-//         cell.classList.add("cell")
-
-//         if (cellType === 1) {
-//         cell.classList.add("wall");
-//         } 
-//         else if (cellType === 0) {
-//         cell.classList.add("path");
-//         cell.classList.add("pellet");
-//         }
-//         else if(cellType === 2){
-//             cell.classList.add("path");
-//             cell.classList.add("powerPellet")
-//         }
-//         else if(cellType === 3) {
-//             cell.classList.add("path");
-//         }
-//         else if(cellType === 4){
-//             cell.classList.add("path")
-//         }
-//         else if (cellType === 5){
-//             cell.classList.add("path", "pellet", "spawnPoint")
-//         }
-
-//         grid.appendChild(cell);
-//         cells.push(cell);
-//     });
-// }
-
-
 function toggleMute() {
     isMuted = !isMuted;
 
@@ -257,32 +224,7 @@ function addGhosts(layout){
     })
 }
 
-// function moveGhostsFromSpawnRoom(){
-//     ghosts.forEach((ghost, idx)=>{
-//         stopGhost(ghost);
-//         let delay = idx * 1000
-//         ghostTimeOut = setTimeout(() =>{
-//             if(gameIsRunning){
-//             stopGhost(ghost)
-//             if(!ghost.interval){
-//                 ghost.interval = setInterval(()=>{
-//                     if (cells[ghost.index].classList.contains("spawnPoint")){
-//                         clearInterval(ghost.interval);
-//                         ghost.interval = 0;
-//                         moveGhost(ghost)
-//                     }
-//                     else{
-//                         let newPosition = ghost.index - mapWidth;
-//                         cells[ghost.index].classList.remove(ghost.className)
-//                         cells[newPosition].classList.add(ghost.className)
-//                         ghost.index -= mapWidth
-//                     }
-//                 }, ghost.speed)
-//             }}
-            
-//         }, delay)})
-    
-// }
+
 
 
 function moveOneGhostFromSpawnRoom(ghostObj, delay){
@@ -339,20 +281,22 @@ function calculatePellets(layout){
     })
 }
 
-
+let previousDir = "right";
 function movePlayer(e){
-    console.log(e);
+
     if(e.code === "KeyW" || e.code === "ArrowUp"){
         if (!cells[pacmanIndex-mapWidth].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
             playerMoveLoop("up")
+            changeRotation("up", previousDir)
         }}
     else if(e.code === "KeyA"){
         if (!cells[pacmanIndex-1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
             playerMoveLoop("left")
+            changeRotation("left", previousDir)
         }
     }
     else if(e.code === "KeyS"){
@@ -360,16 +304,23 @@ function movePlayer(e){
             clearInterval(movementInterval)
             movementInterval = 0
             playerMoveLoop("down")
+            changeRotation("down", previousDir)
         }}
     else if(e.code === "KeyD"){
         if (!cells[pacmanIndex+1].classList.contains("wall")){
             clearInterval(movementInterval)
             movementInterval = 0
             playerMoveLoop("right")
+            changeRotation("right", previousDir)
         }}
     else{console.log("not valid input")}
 } 
 
+function changeRotation(dir){
+    grid.classList.remove(previousDir)
+    grid.classList.add(dir)
+    previousDir = dir;
+}
 
 
 function playerMoveLoop(dir){
@@ -382,6 +333,7 @@ function playerMoveLoop(dir){
             else if (!cells[newPosition].classList.contains("wall")){
                 cells[pacmanIndex].classList.remove("pacman")
                 cells[newPosition].classList.add("pacman")
+                previousPacmanIndex = pacmanIndex;
                 pacmanIndex = newPosition;
                 eatPellet()
                 checkForGhost()
@@ -411,7 +363,6 @@ function newPlayerPosition(dir){
 
 
 
-
 function eatPellet(){
     if(cells[pacmanIndex].classList.contains("pellet")){
         cells[pacmanIndex].classList.remove("pellet");
@@ -428,19 +379,7 @@ function eatPellet(){
     }
 }
 
-// function powerPellet(){
-//     playerSpeed = powerSpeed
-//     ghosts.forEach((ghost)=>{
-//         cells[ghost.index].classList.add("scaredGhost")
-//     })
-//     clearTimeout(powerPelletTimeout)
-//     powerPelletTimeout = setTimeout(()=>{
-//         playerSpeed = startingSpeed
-//         ghosts.forEach((ghost)=>{
-//             cells[ghost.index].classList.remove("scaredGhost")
-//         })
-//     }, 5000)
-// }
+
 
 function powerPellet(){
     playerSpeed = powerSpeed
@@ -929,4 +868,78 @@ init()
 //             redGhost.index = index;
 //         }
 //     })
+// }
+
+// function moveGhostsFromSpawnRoom(){
+//     ghosts.forEach((ghost, idx)=>{
+//         stopGhost(ghost);
+//         let delay = idx * 1000
+//         ghostTimeOut = setTimeout(() =>{
+//             if(gameIsRunning){
+//             stopGhost(ghost)
+//             if(!ghost.interval){
+//                 ghost.interval = setInterval(()=>{
+//                     if (cells[ghost.index].classList.contains("spawnPoint")){
+//                         clearInterval(ghost.interval);
+//                         ghost.interval = 0;
+//                         moveGhost(ghost)
+//                     }
+//                     else{
+//                         let newPosition = ghost.index - mapWidth;
+//                         cells[ghost.index].classList.remove(ghost.className)
+//                         cells[newPosition].classList.add(ghost.className)
+//                         ghost.index -= mapWidth
+//                     }
+//                 }, ghost.speed)
+//             }}
+            
+//         }, delay)})
+    
+// }
+
+
+// function createMap(layout) {
+//     layout.forEach((cellType, index) => {
+//         const cell = document.createElement("div");
+//         cell.dataset.index = index;
+//         cell.classList.add("cell")
+
+//         if (cellType === 1) {
+//         cell.classList.add("wall");
+//         } 
+//         else if (cellType === 0) {
+//         cell.classList.add("path");
+//         cell.classList.add("pellet");
+//         }
+//         else if(cellType === 2){
+//             cell.classList.add("path");
+//             cell.classList.add("powerPellet")
+//         }
+//         else if(cellType === 3) {
+//             cell.classList.add("path");
+//         }
+//         else if(cellType === 4){
+//             cell.classList.add("path")
+//         }
+//         else if (cellType === 5){
+//             cell.classList.add("path", "pellet", "spawnPoint")
+//         }
+
+//         grid.appendChild(cell);
+//         cells.push(cell);
+//     });
+// }
+
+// function powerPellet(){
+//     playerSpeed = powerSpeed
+//     ghosts.forEach((ghost)=>{
+//         cells[ghost.index].classList.add("scaredGhost")
+//     })
+//     clearTimeout(powerPelletTimeout)
+//     powerPelletTimeout = setTimeout(()=>{
+//         playerSpeed = startingSpeed
+//         ghosts.forEach((ghost)=>{
+//             cells[ghost.index].classList.remove("scaredGhost")
+//         })
+//     }, 5000)
 // }
