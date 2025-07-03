@@ -77,6 +77,33 @@ const tryAgainButton = document.querySelector(".retryButton");
 const playAgainButton = document.querySelector(".restart");
 const livesDisplay = document.querySelector(".lives")
 
+let cellTypes = [
+    {
+        cellNum : 0,
+        className : ["pellet", "path"],
+    },
+    {
+        cellNum: 1,
+        className: ["wall"],
+    },
+    {
+        cellNum: 2,
+        className: ["powerPellet", "path"],
+    },
+    {
+        cellNum: 3,
+        className: ["path"],
+    },
+        {
+        cellNum: 4,
+        className: ["path"],
+    },
+    {
+        cellNum: 5,
+        className: ["path", "spawnPoint"],
+    },
+]
+
 const ghosts = [
 {
     index: null,
@@ -112,6 +139,21 @@ const ghosts = [
 },
 ]
 
+function createMap2(layout){
+    layout.forEach((cellType, index)=>{
+        const cell = document.createElement("div");
+        cell.dataset.index = index;
+        const typeEntry = cellTypes.find(t => t.cellNum === cellType);
+        if (typeEntry) {
+            cell.classList.add(...typeEntry.className);
+        }
+        grid.appendChild(cell);
+        cells.push(cell);
+    })
+}
+
+
+
 
 function createMap(layout) {
     layout.forEach((cellType, index) => {
@@ -145,6 +187,8 @@ function createMap(layout) {
     });
 }
 
+
+
 function addPacMan(layout){
     layout.forEach((cellType, index) =>{
         if (cellType === 3) {
@@ -155,15 +199,7 @@ function addPacMan(layout){
     })
 }
 
-function addRedGhost(layout){
-    layout.forEach((cellType, index) =>{
-        if (cellType === 4) {
-            cells[index].classList.add("redGhost");
-            redGhost.startingIndex = index
-            redGhost.index = index;
-        }
-    })
-}
+
 
 function addGhosts(layout){
     let ghostSpawns = [];
@@ -205,6 +241,23 @@ function moveGhostsFromSpawnRoom(){
     
 }
 
+function moveOneGhostFromSpawnRoom(ghostObj){
+    let ghostTimeout = setTimeout(()=>{
+        ghost.interval = setInterval(()=>{
+            if(cells[ghostObj.index].classList.contains("spawnPoint")){
+                clearInterval(ghost.interval);
+                ghost.interval = 0
+                moveGhost(ghostObj)
+            }
+            else{
+                let newPosition = ghostObj.index - mapWidth;
+                cells[ghostObj.index].classList.remove(ghostObj.className)
+                cells[newPosition].classList.add(ghostObj.className)
+                ghostObj.index -= mapWidth
+            }
+        }, ghostObj.speed)
+    }, 5000)
+}
 
 
 function init(){
@@ -212,7 +265,8 @@ function init(){
     lives = 3
     setHearts()
     scoreDisplay.innerHTML = score
-    createMap(currentMap)
+    // createMap(currentMap)
+    createMap2(currentMap)
     addPacMan(currentMap)
     addGhosts(currentMap)
     // addRedGhost(layout1)
@@ -447,7 +501,7 @@ function eatGhost(ghostObj){
     ghostObj.index = ghostObj.startingIndex;
     setTimeout(()=>{
         cells[ghostObj.startingIndex].classList.add(ghostObj.className);
-        moveGhost(ghostObj)
+        moveOneGhostFromSpawnRoom(ghostObj)
     },1000)
 }
 
@@ -517,7 +571,7 @@ function restart(){
     // addGhosts(currentMap)
     addPellets(currentMap)
     calculatePellets(currentMap)
-    // moveGhostsFromSpawnRoom()
+    moveGhostsFromSpawnRoom()
 }
 
 function hideDisplays(){
@@ -779,4 +833,13 @@ init()
 //                 }
 //         }, playerSpeed)
 //     }
+// }
+// function addRedGhost(layout){
+//     layout.forEach((cellType, index) =>{
+//         if (cellType === 4) {
+//             cells[index].classList.add("redGhost");
+//             redGhost.startingIndex = index
+//             redGhost.index = index;
+//         }
+//     })
 // }
