@@ -16,10 +16,23 @@ This is a solo project completed within 7 days.
 A browser based game using HTML, CSS and JavaScript.
 
 # Brief
-The brief was to pick a game to code from scratch.
+The brief was to pick a game to code from scratch, I chose pacman.
 
 # Planning
+In my notebook I broke the planning down into several stages:
 
+1. grid layout.
+    I knew I wanted to move pacman and ghosts around by passing classes around divs, so I decided to make the map using a function that would create divs and assign classes based on an array of numbers.
+
+2. Movement.
+    I planed to create functions to add and remove the class for pacman/a ghost to and from the divs which would determine what CSS styling is being expressed, making it look like pacman is moving around the grid.
+
+3. Design.
+    After researching (playing pacman), I knew I needed a high contrast, simple design dominated by a blue/yellow colour scheme (with a few pops of red). I also wanted to keep the retro feel so I aimed to use 8-bit style fonts and images for the ghosts and other icons.
+    The general layout of the page would be simple. A title up top, the map in the center with the lives and score above. I wanted to keep the screen around the game itself as uncluttered as possible while still providing important information.
+
+4. Potential difficulties.
+    Thinking about the logic of the game I listed down the aspects that I thought would be the most difficult to work out.
 
 # Build/Code Process
 The process for building this was to first establish the basic mechanics for the game then build on top of that from there.
@@ -201,8 +214,72 @@ if (directions.length > 1){
 
 Originally I was hardcoding the ghost into this like I did with pacman, but since there are going to be multiple ghosts I wanted to use the same functions for all of their movement. I ended up changing how the ghost was described in the code by creating ghost objects(which you can see is passed through the various movement arguments). This was spurred on by me struggling to clear the interal in the `choosePath()` function when I tried to just use global variables.
 
+Before the ghost movement, I had added the pellets (by adding a class to the divs that would have pellets on them) and written the `eatPellet()` function which removed the class and added points. This gave me a win condition, but with the ghost in the game I could now have my lose condition.
 
+I implimented this by getting both the ghost and pacman to check if each others' classes were on the same div. if so then I would reset their positions and reduce the player's lives by one and reflect that by changing the classes for one of the heart divs.
 
+```function checkForPacman(ghostObj){
+    if(grid.classList.contains("scared")&&cells[ghostObj.index].classList.contains("pacman")){
+        eatGhost(ghostObj)
+    }
+    else if(cells[ghostObj.index].classList.contains("pacman")){
+        loseLife()
+    }
+}
+
+function checkForGhost(){
+    const collidedGhost = ghosts.find(ghost=> ghost.index === pacmanIndex)
+    if(grid.classList.contains("scared") && collidedGhost){
+        score += 100
+        eatGhost(collidedGhost)
+    }
+    else if(ghosts.some(ghost => cells[pacmanIndex].classList.contains(ghost.className))){
+        loseLife()
+    }
+}
+
+function loseLife(){
+    document.removeEventListener("keydown", movePlayer)
+    clearInterval(movementInterval)
+    movementInterval = 0;
+    ghosts.forEach((ghost)=>{
+        stopGhost(ghost)
+    })
+    lives --;
+    PacmanDeath.play();
+    loseHeart()
+    if(lives===0){
+        loseGame()
+        gameIsRunning = false
+    }
+    else{resetPositions()}
+}
+
+function loseHeart(){
+    let nextHeart = document.querySelector(".heart")
+    nextHeart.classList.remove("heart")
+    nextHeart.classList.add('greyHeart')
+}
+```
+
+Now the game could be played on its most basic level, so it was time to add the Power Pellet.
+
+This pellet is very similar to a regular one, but with its own class which allowed me to check for it in `eatPellet`. When pacman ate a Power Pellet, his speed would increase, the ghosts would become scared (by adding a class to the entire grid), and when the ghost and pacman check for each other, they would first check to see if the ghosts were scared, and if they were then pacman would eat the ghost! I then used a `Timeout` to revert the changes after a set time.
+
+The next major step towards the MVP would be to add more ghosts. First I would need to create a larger map. After a couple changes I ended up a 28x36 map which should give us plenty of space for the four ghosts.
+
+As I had created the ghost object already looking ahead to adding more ghosts, I created objects for the rest, and used two `forEach` loops to add the ghost spawn locations to an array, then add a different ghost to each of those divs.
+
+Now that the ghosts were added into a spawn room in the middle of the map, I had to get them out, so I wrote a function that made them move upwards, regardless of the walls, until they hit a div with the class `spawnCell`. This then halted their movement and triggered their normal movement function.
+
+Then I had a great struggle to tinker and rewrite pieces of code that worked well for one ghost but fell apart when more than one was introduced to the mix. More details about this will the in the challenges section below.
+
+Once I had all the ghosts in the game functioning properly, my final task before the MVP was done was to complete the sound. This was relatively simple as I could just download the pacman sound effects, add them to a `const` in the JavaScript and play the sound when the correct event occurred (like dying or eating a ghost). However, eating pellets was a struggle and I again will go into more details in the challenges section.
+
+Now that I had the sounds done, I added a mute button, and a start screen which asks for you to input a three letter name as I planned on creating a high score system later on.
+
+I then made Pacman rotate by giving his four possible background images and switching between them by adding a class to the grid like with the scared ghost class. I chose to add this to the grid not to pacman as I had previously been rotating each div and trying to rotate them back after which created lots of mess with gaps between the divs and divs not rotating back.
+I then decided to take a completely different path and just apply the class to the grid so that if something strange did happen with the movement, he would stay in the same orientation until the player changes direction.
 
 
 # Challenges
