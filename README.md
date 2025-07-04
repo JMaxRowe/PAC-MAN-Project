@@ -301,7 +301,7 @@ Multiple ghosts:
     A good example for this is the issue where scared ghosts would run through each other, removing the scared ghost class from one. My initial instinct was to create collision detection between ghosts to get around this, but my tutor sam suggested just applying the scared class to the grid, which was a much simpler solution which tackled the actual problem.
 
 # Bugs
-1. Sometimes the pacman/ghost image will appear in front of the game over screen instead of behind it.
+1. Sometimes the pacman/ghost image will appear in front of the game over screen instead of behind it. (for now all characters get removed after loss, but I'd like to still have them in the backgorund so that will change.)
 
 2. increased player speed from power pellet only starts/ends when player hits a wall or turns. Need to reset
 

@@ -584,6 +584,7 @@ function wonGame(){
 function loseGame(){
     loseScreen.style.display = "flex";
     loserScoreValue.innerHTML = score;
+    removeAllSprites()
 }
 
 function restart(){
