@@ -96,12 +96,12 @@ const startScreen = document.querySelector(".startScreen");
 const startButton = document.querySelector(".startButton");
 const nameInput = document.getElementById("playerName");
 
-const munchSound = new Audio("../assets/sounds/Pacman_Munch.mp3");
-const pacmanBeginning = new Audio("../assets/sounds/pacman_beginning.wav");
-const PacmanDeath = new Audio("../assets/sounds/pacman_death.wav");
-const PacmanIntermission = new Audio("../assets/sounds/pacman_intermission.wav");
-const PacmanEatGhost = new Audio("../assets/sounds/pacman_eatghost.wav");
-const powerPelletSound = new Audio("../assets/sounds/PacManPowerPellet.mp3");
+const munchSound = new Audio("assets/sounds/Pacman_Munch.mp3");
+const pacmanBeginning = new Audio("assets/sounds/pacman_beginning.wav");
+const PacmanDeath = new Audio("assets/sounds/pacman_death.wav");
+const PacmanIntermission = new Audio("assets/sounds/pacman_intermission.wav");
+const PacmanEatGhost = new Audio("assets/sounds/pacman_eatghost.wav");
+const powerPelletSound = new Audio("assets/sounds/PacManPowerPellet.mp3");
 const allSounds = [
     munchSound, 
     pacmanBeginning, 
