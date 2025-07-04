@@ -283,6 +283,8 @@ I then decided to take a completely different path and just apply the class to t
 
 
 # Challenges
+Multiple ghosts:
+    Introducing multiple ghosts created a few issues. The largest issue was that the function I wrote to move 
 
 
 # Wins
@@ -295,3 +297,8 @@ I then decided to take a completely different path and just apply the class to t
 
 
 # Future Improvements
+Ghost Algorithm:
+    This was one of the main reasons I wanted to tackle the project, and after some setbacks I was working on it in the last day or so but couldn't complete it unfortunately. The plan is to calculate the distance and direction between the ghost and pacman, then call one of two functions. One function would be to chase the pacman by moving in a direction which would reduce the distance between them. The other function would run only if the scared class was applied to the grid, which would make them try to run away from pacman by moving in a direction that increases the distance between the two.
+
+HighScore
+    I'm planning on adding a high score section which will locally save the top 20 scores, this is why the start screen promps you for a three letter name then saves it to variable.

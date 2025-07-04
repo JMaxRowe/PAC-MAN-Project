@@ -267,12 +267,13 @@ function init(){
     gameIsRunning = true;
     lives = 3
     setHearts()
+    createMap(currentMap)
     scoreDisplay.innerHTML = score
 }
 
 function startGame(){
     startScreen.style.display = "none",
-    createMap(currentMap)
+
     calculatePellets(currentMap)
     addPlayerName()
     addPacMan(currentMap)
@@ -387,6 +388,9 @@ function eatPellet(){
         powerPellet()
     }
 }
+
+
+
 
 
 
@@ -951,4 +955,22 @@ init()
 //             cells[ghost.index].classList.remove("scaredGhost")
 //         })
 //     }, 5000)
+// }
+
+// function playMunchSound() {
+//     if (!isMuted) {
+//         if (!munchIsPlaying) {
+//             munchIsPlaying = true;
+//             munchSound.volume = defaultVolume;
+            
+//             munchSound.play();
+//             munchSound.onended = () => {
+//                 munchIsPlaying = false;
+//                 munchQueue.shift()
+//                 if (munchQueue.length > 0) {
+//                     playMunchSound();
+//                 }
+//             };
+//         }
+//     }
 // }
