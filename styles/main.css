@@ -137,14 +137,14 @@ main{
 }
 
 #grid.down div.pacman{
-    background-image: url(../assets/PacMan\ Down.png);
+    background-image: url(../assets/PacMan_Down.png);
 }
 
 #grid.up div.pacman{
-    background-image: url(../assets/PacMan\ Up.png);
+    background-image: url(../assets/PacMan_Up.png);
 }
 #grid.right div.pacman{
-    background-image: url(../assets/PacMan\ right.png);
+    background-image: url(../assets/PacMan_right.png);
 }
 
 #grid.left div.pacman{
