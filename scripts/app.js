@@ -101,7 +101,7 @@ const pacmanBeginning = new Audio("../assets/sounds/pacman_beginning.wav");
 const PacmanDeath = new Audio("../assets/sounds/pacman_death.wav");
 const PacmanIntermission = new Audio("../assets/sounds/pacman_intermission.wav");
 const PacmanEatGhost = new Audio("../assets/sounds/pacman_eatghost.wav");
-const powerPelletSound = new Audio("../assets/sounds/Pac Man Power Pellet.mp3");
+const powerPelletSound = new Audio("../assets/sounds/PacManPowerPellet.mp3");
 const allSounds = [
     munchSound, 
     pacmanBeginning, 
