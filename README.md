@@ -288,13 +288,24 @@ Multiple ghosts:
 
 
 # Wins
+1. Movement
+    Getting the movement working with collision detection then making the code more adaptable by being able to pass the ghost object through was a big win. That was really the core mechanic of the game and getting that down and have it be so flexible made further changes much easier to impliment.
 
+2. Design
+    I think the design encapsulated the feeling of pacman well, and it doesn't feel too messy or cluttered to me, it feels like pacman.
 
 # Key Learnings/Takeaways
-
+1. Future-proofing.
+    While I did always plan on starting small and building the game up, I found some of my functions needed major reworking when I added more ghosts. Another thing was that some parts I hardcoded just to get the red ghost moving, but that was me wanting to be quicker now but giving myself more work later on.
+2. Looking for simpler solutions.
+    A good example for this is the issue where scared ghosts would run through each other, removing the scared ghost class from one. My initial instinct was to create collision detection between ghosts to get around this, but my tutor sam suggested just applying the scared class to the grid, which was a much simpler solution which tackled the actual problem.
 
 # Bugs
+1. Sometimes (very rarely) the pacman/ghost image will appear in front of the game over screen instead of behind it.
 
+2. increased player speed from power pellet only starts/ends when player hits a wall or turns. Need to reset
+
+3. The pellet eating sound has a buffer between each sound, which means the clips can't play back to back and therefore sound disjointed. I've tried several workarounds but haven't found a fix yet.
 
 # Future Improvements
 Ghost Algorithm:

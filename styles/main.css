@@ -86,7 +86,7 @@ main{
 #grid {
     display: grid;
     grid-template-columns: repeat(28, 1fr);
-    min-width: 400px;
+    min-width: 430px;
     height: auto;
     margin: 0 auto;
     gap: 0px;
@@ -323,3 +323,9 @@ main{
     color: darkorange;
 }
 
+.controls{
+    font-size: 0.75em;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
